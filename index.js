@@ -11,7 +11,7 @@ app.use(express.json())
 
 // Routes 🐎
 app.use(express.static('public'))
-app.use(routes)
+app.use('/api/', routes)
 
 // Start Server 🎉
 const PORT = 3000
