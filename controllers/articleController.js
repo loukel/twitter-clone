@@ -1,6 +1,5 @@
-const e = require('express')
 let fs = require('fs')
-const { article } = require('../utils/articleFunctions')
+const { Article } = require('../utils/articleFunctions')
 
 const get_articles = (req, res) => {
   let store = fs.readFileSync("./store.json")
@@ -12,7 +11,7 @@ const create_article = (req, res) => {
   const data = req.body
   const store = fs.readFileSync("./store.json")
   let storeObj = JSON.parse(store)
-  const articleObj = article(data)
+  const articleObj = Article(data)
   storeObj.push(articleObj)
   const newStore = JSON.stringify(storeObj)
   fs.writeFileSync("./store.json", newStore)

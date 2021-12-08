@@ -1,15 +1,15 @@
 let fs = require('fs')
-const { article } = require('./utils/articleFunctions')
+const { Article } = require('./utils/articleFunctions')
 
 let articles = [
-  article({
+  Article({
     authorUID: '123456789',
     title: 'Cool Article 1',
     description: 'About cool stuff',
     body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, tempora possimus. Reiciendis architecto, quaerat unde non numquam, vitae dignissimos voluptatum saepe tempora quibusdam, sit corrupti tempore voluptatem atque quod libero!',
     category: 'Computer Science',
   }),
-  article({
+  Article({
     authorUID: '123456789',
     title: 'Cool Article 2',
     description: 'About more cool stuff',

@@ -1,6 +1,6 @@
 let cuid = require('cuid')
 
-const article = ({
+const Article = ({
   authorUID,
   title,
   description,
@@ -13,8 +13,10 @@ const article = ({
     description: description || null,
     body: body,
     category: category || null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
 })
 
 module.exports = {
-  article,
+  Article,
 }

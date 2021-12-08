@@ -13,6 +13,10 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use('/api/', routes)
 
+app.use ((_, res) => {
+  res.status(404).send('<center style=\'font-size: 3rem;\'>Page Not Found</center>')
+})
+
 // Start Server 🎉
 const PORT = 3000
 app.listen(PORT, () => {
