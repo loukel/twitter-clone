@@ -6,4 +6,6 @@ const getPosts = async () => {
   console.log(posts)
 }
 
-getPosts()
+export {
+  getPosts
+}
