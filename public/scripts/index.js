@@ -1,9 +1,9 @@
-const getArticles = async () => {
-  const articles = await fetch('/api/articles', {
+const getPosts = async () => {
+  const posts = await fetch('/api/posts', {
     method: 'GET',
   }).then(res => res.json())
 
-  console.log(articles)
+  console.log(posts)
 }
 
-getArticles()
+getPosts()

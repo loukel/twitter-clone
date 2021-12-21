@@ -1,13 +1,13 @@
 let fs = require('fs')
 const { Article } = require('../utils/articleFunctions')
 
-const get_articles = (req, res) => {
+const get_posts = (req, res) => {
   let store = fs.readFileSync("./store.json")
   let storeObj = JSON.parse(store)
   res.status(200).send(storeObj)
 }
 
-const create_article = (req, res) => {
+const create_post = (req, res) => {
   const data = req.body
   const store = fs.readFileSync("./store.json")
   let storeObj = JSON.parse(store)
@@ -18,7 +18,7 @@ const create_article = (req, res) => {
   res.status(201).send(articleObj)
 }
 
-const get_article = (req, res) => {
+const get_post = (req, res) => {
   const id = req.params.id
   const store = fs.readFileSync("./store.json")
   const storeObj = JSON.parse(store)
@@ -26,7 +26,7 @@ const get_article = (req, res) => {
   res.status(200).send(article)
 }
 
-const update_article = (req, res) => {
+const update_post = (req, res) => {
   const id = req.params.id
   const data = req.body
   const store = fs.readFileSync("./store.json")
@@ -47,7 +47,7 @@ const update_article = (req, res) => {
   }
 }
 
-const destroy_article = (req, res) => {
+const destroy_post = (req, res) => {
   const id = req.params.id
   const store = fs.readFileSync("./store.json")
   let storeObj = JSON.parse(store)
@@ -62,9 +62,9 @@ const destroy_article = (req, res) => {
 }
 
 module.exports = {
-  get_articles,
-  create_article,
-  get_article,
-  update_article,
-  destroy_article,
+  get_posts,
+  create_post,
+  get_post,
+  update_post,
+  destroy_post,
 }

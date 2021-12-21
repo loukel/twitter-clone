@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const articleRoutes = require('./articleRoutes')
+const postRoutes = require('./postRoutes')
 
-router.use('/articles', articleRoutes)
+router.use('/posts', postRoutes)
 
 module.exports = router

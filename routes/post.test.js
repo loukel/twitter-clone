@@ -1,29 +1,29 @@
 const app = require('../server')
 const request = require('supertest')
 
-describe('Test article endpoints', () => {
-  // get_articles
-  test('GET /api/articles succeeds', async () => {
-    const res = await request(app).get('/api/articles')
+describe('Test post endpoints', () => {
+  // get_posts
+  test('GET /api/posts succeeds', async () => {
+    const res = await request(app).get('/api/posts')
     return expect(res.status).toBe(200)
   })
 
-  // create_article
+  // create_post
   let articleId = -1
-  test('POST /api/articles succeeds', async () => {
+  test('POST /api/posts succeeds', async () => {
     const data = {
       "title": "Cool article 3",
       "authorUID": "1234543",
       "body": "Lorem300",
     }
-    const res = await request(app).post('/api/articles').send(data)
+    const res = await request(app).post('/api/posts').send(data)
     articleId = res.body.id
     return expect(res.status).toBe(201)
   })
 
   // get_article
   test('GET /api/articles/:id succeeds', async () => {
-    const res = await request(app).get(`/api/articles/${articleId}`)
+    const res = await request(app).get(`/api/posts/${articleId}`)
     return expect(res.status).toBe(200)
   })
 
