@@ -22,24 +22,24 @@ describe('Test post endpoints', () => {
   })
 
   // get_article
-  test('GET /api/articles/:id succeeds', async () => {
+  test('GET /api/posts/:id succeeds', async () => {
     const res = await request(app).get(`/api/posts/${articleId}`)
     return expect(res.status).toBe(200)
   })
 
   // update_article
-  test('PUT /api/articles/:id succeeds', async () => {
+  test('PUT /api/posts/:id succeeds', async () => {
     const data = {
       "title": "Not Cool article 3",
       "body": "Lorem301",
     }
-    const res = await request(app).put(`/api/articles/${articleId}`).send(data)
+    const res = await request(app).put(`/api/posts/${articleId}`).send(data)
     return expect(res.status).toBe(204)
   })
 
   // delete_article
-  test('DELETE /api/articles/:id succeeds', async () => {
-    const res = await request(app).delete(`/api/articles/${articleId}`)
+  test('DELETE /api/posts/:id succeeds', async () => {
+    const res = await request(app).delete(`/api/posts/${articleId}`)
     return expect(res.status).toBe(204)
   })
 })
