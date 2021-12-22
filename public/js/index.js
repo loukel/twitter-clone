@@ -1,6 +1,6 @@
 import Post from "./components/Post.js"
 import Posts from "./components/Posts.js"
-import { createPost, getPosts } from "./services/postApi.js"
+import { createPost, getPosts, getPost } from "./services/postApi.js"
 
 const queryString = window.location.search
 const parameters = new URLSearchParams(queryString)
@@ -15,8 +15,9 @@ const main = async () => {
     let posts = await getPosts()
     postsEl.innerHTML = Posts({posts})
   } else {
-    let post = await getPosts(postId)
-    postsEl.innerHTML = Post({post})
+    let post = await getPost(postId)
+    console.log(post)
+    postsEl.innerHTML = Post(post)
   }
 
   const addPost = (post) => {

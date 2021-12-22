@@ -24,7 +24,6 @@ const update_post = (req, res) => {
     res.sendStatus(404)
   } else {
     post.update(data)
-    console.log(post)
     res.sendStatus(204)
   }
 }

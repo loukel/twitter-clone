@@ -28,4 +28,5 @@ const getPost = async (id) => {
 export {
   getPosts,
   createPost,
+  getPost,
 }
