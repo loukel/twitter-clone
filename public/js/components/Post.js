@@ -1,4 +1,15 @@
-const Post = ({id, body, createdAt}) => {
+const Post = ({id, createdAt, body}) => {
+  // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
+  const goToPost = id => {
+    const params = new URLSearchParams(window.location.search)
+
+    params.set('postId', id)
+    window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
+    rerender()
+  }
+
+  window.goToPost = goToPost
+
   return `
     <div 
       class="border border-gray-200 p-6 rounded-lg mb-3 cursor-pointer" 
