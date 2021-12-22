@@ -1,1 +1,13 @@
-[{"id":"ckxhurckg0000igud5ltv8xq0","body":"cool post","createdAt":"2021-12-22T18:11:28.480Z","updatedAt":"2021-12-22T18:11:28.480Z"},{"id":"ckxhurckh0001igudg5yc0rbo","body":"cool post 2","createdAt":"2021-12-22T18:11:28.481Z","updatedAt":"2021-12-22T18:11:28.481Z"},{"id":"ckxhx7vrx0000p0udc998093r","body":"Heheasdasdsa","createdAt":"2021-12-22T19:20:19.101Z","updatedAt":"2021-12-22T19:20:19.101Z"},{"id":"ckxi29cpu0000h8ud9mwo2zna","body":"asdasdasdas","createdAt":"2021-12-22T21:41:25.794Z","updatedAt":"2021-12-22T21:41:25.794Z"},{"id":"ckxi29kmb0000hsud4api2dqo","body":"asdasdasd asd as das dsa d as das da a aa a as a sddasd as","createdAt":"2021-12-22T21:41:36.035Z","updatedAt":"2021-12-22T21:41:36.035Z"},{"id":"ckxi29mwx0000houd55b785ba","body":"asdasd asd as das da das ","createdAt":"2021-12-22T21:41:39.009Z","updatedAt":"2021-12-22T21:41:39.009Z"},{"id":"ckxi29q8n0001houdb9ri42fl","body":"asd asd as das das das das a sd a dasssssssssssssssssss","createdAt":"2021-12-22T21:41:43.319Z","updatedAt":"2021-12-22T21:41:43.319Z"},{"id":"ckxi2cg7t0000qcud5leg412g","body":"asddddddddddddddddd","createdAt":"2021-12-22T21:43:50.298Z","updatedAt":"2021-12-22T21:43:50.298Z"},{"id":"ckxi2ck7n0000kwud8u6vfqke","body":"asaaaaa","createdAt":"2021-12-22T21:43:55.475Z","updatedAt":"2021-12-22T21:43:55.475Z"}]
+[{
+  "id": "ckxi4nk02000044udc0pvaqxc",
+  "parentId": null,
+  "body": "cool post",
+  "createdAt": "2021-12-22T22:48:27.650Z",
+  "updatedAt": "2021-12-22T22:48:27.650Z"
+}, {
+  "id": "ckxi4nk03000144ud2gzpc324",
+  "parentId": "ckxi4nk02000044udc0pvaqxc",
+  "body": "cool post 2",
+  "createdAt": "2021-12-22T22:48:27.651Z",
+  "updatedAt": "2021-12-22T22:48:27.651Z"
+}]

@@ -13,7 +13,7 @@ const create_post = (req, res) => {
 const get_post = (req, res) => {
   const id = req.params.id
   const post = Post.find(id)
-  res.status(200).send(post)
+  res.status(200).send(post.include({parent: true, children: true}))
 }
 
 const update_post = (req, res) => {

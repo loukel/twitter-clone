@@ -4,14 +4,29 @@ let collectionName = 'posts'
 const collectionFile =`./database/${collectionName}.json`
 
 class Post{
-  constructor({id, body, createdAt, updatedAt}) {
+  constructor({id, parentId, body, createdAt, updatedAt}) {
     this.id = id || cuid()
+    this.parentId = parentId || null
     this.body = body || null
     this.createdAt = createdAt || new Date()
     this.updatedAt = updatedAt || new Date()
     if (!id) {
       this.#create()
     }
+  }
+
+  include({parent, children} = {parent: false, children: false}) {
+    let obj = this.#json()
+
+    if (parent) {
+      obj['parent'] = this.parent()
+    }
+
+    if (children) {
+      obj['children'] = this.children()
+    }
+
+    return obj
   }
 
   update({data}) {
@@ -29,6 +44,14 @@ class Post{
     storeObj = storeObj.filter(item => item.id !== this.id)
     this.#replaceStore(storeObj)
     this.id = -1
+  }
+
+  parent() {
+    return Post.find(this.parentId)
+  }
+
+  children() {
+    return Post.findMany({parentId: this.id})
   }
 
   #json() {
@@ -53,7 +76,12 @@ class Post{
     return JSON.parse(store)
   }
 
-  static findMany() {
+  static findMany({ parentId } = { parentId: false }) {
+    if (parentId) {
+      return this.getStore()
+        .filter(item => item.parentId === parentId)
+        .map(post => new Post(post))
+    }
     return this.getStore().map(post => new Post(post))
   }
 
