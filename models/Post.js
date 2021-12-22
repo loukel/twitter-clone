@@ -6,7 +6,7 @@ const collectionFile =`./database/${collectionName}.json`
 class Post{
   constructor({id, body, createdAt, updatedAt}) {
     this.id = id || cuid()
-    this.body = body
+    this.body = body || null
     this.createdAt = createdAt || new Date()
     this.updatedAt = updatedAt || new Date()
     if (!id) {

@@ -6,8 +6,7 @@ const get_posts = (req, res) => {
 
 const create_post = (req, res) => {
   const data = req.body
-  const body = data.body
-  let post = new Post({ body })
+  let post = new Post(data)
   res.status(201).send(post)
 }
 
