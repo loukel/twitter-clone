@@ -1,5 +1,3 @@
-let fs = require('fs')
-const { Article } = require('../utils/articleFunctions')
 let Post = require('../models/Post')
 
 const get_posts = (req, res) => {
