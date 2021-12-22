@@ -3,7 +3,7 @@ const getPosts = async () => {
     method: 'GET',
   }).then(res => res.json())
 
-  console.log(posts)
+  return posts
 }
 
 const createPost = async (body) => {
@@ -15,6 +15,12 @@ const createPost = async (body) => {
     },
     body: JSON.stringify(body),
   }).then(res => res.json())
+
+  return post
+}
+
+const getPost = async (id) => {
+  const post = await fetch(`/api/posts/${id}`).then(res => res.json())
 
   return post
 }
