@@ -15,5 +15,5 @@ const PostView = async (id) => {
     </section>
   `
 }
- 
+
 export default PostView
