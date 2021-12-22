@@ -22,6 +22,7 @@
   "homepage": "https://github.com/loukel/assignment-1#readme",
   "dependencies": {
     "autoprefixer": "^10.4.0",
+    "cssnano": "^5.0.14",
     "cuid": "^2.1.8",
     "express": "^4.17.1",
     "install": "^0.13.0",

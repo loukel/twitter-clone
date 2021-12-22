@@ -7,6 +7,7 @@ This web app is a social media inspired by Twitter, posts are not allowed to inc
 ## Installation and setup
 
 `npm i`
+`npm run build:css`
 `npm run seed`
 `npm start`
 Navigate to [http://localhost:3000/](http://localhost:3000/)
@@ -20,3 +21,5 @@ Back-end Models inspired by Laravel, MVC architecture, JSON database inspired by
 ## Styling
 
 This app uses Tailwind css libary to style the front-end.
+
+Therefore I did modify premade components from https://v1.tailwindcss.com/components/.
