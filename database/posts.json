@@ -1,13 +1,1 @@
-[{
-  "id": "ckxi4nk02000044udc0pvaqxc",
-  "parentId": null,
-  "body": "cool post",
-  "createdAt": "2021-12-22T22:48:27.650Z",
-  "updatedAt": "2021-12-22T22:48:27.650Z"
-}, {
-  "id": "ckxi4nk03000144ud2gzpc324",
-  "parentId": "ckxi4nk02000044udc0pvaqxc",
-  "body": "cool post 2",
-  "createdAt": "2021-12-22T22:48:27.651Z",
-  "updatedAt": "2021-12-22T22:48:27.651Z"
-}]
+[{"id":"ckxi6nmgj0000r4ud2md216qg","parentId":null,"body":"1","createdAt":"2021-12-22T23:44:30.067Z","updatedAt":"2021-12-22T23:44:30.067Z"},{"id":"ckxi6nqha0001r4ud6h0h2231","parentId":"ckxi6nmgj0000r4ud2md216qg","body":"2","createdAt":"2021-12-22T23:44:35.278Z","updatedAt":"2021-12-22T23:44:35.278Z"},{"id":"ckxi6nsqc0000n4ud52wq23re","parentId":"ckxi6nqha0001r4ud6h0h2231","body":"3","createdAt":"2021-12-22T23:44:38.197Z","updatedAt":"2021-12-22T23:44:38.197Z"},{"id":"ckxi6nv6w00009kudd77n4i6z","parentId":"ckxi6nsqc0000n4ud52wq23re","body":"4","createdAt":"2021-12-22T23:44:41.384Z","updatedAt":"2021-12-22T23:44:41.384Z"}]

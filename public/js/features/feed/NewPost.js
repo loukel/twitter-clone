@@ -11,13 +11,12 @@ const NewPost = (posts) => {
     }
 
     if (e.key !== ' ') {
-      let re = /[a-zA-Z]$/
+      let re = /[a-zA-Z0-9]$/
       if (!re.test(e.key)) {
         e.preventDefault()
       }
     }
   }
-
 
   const handleInput = () => {
     const e = self.event
