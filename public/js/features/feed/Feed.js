@@ -1,6 +1,6 @@
 import { getPosts } from "../../services/postApi.js"
 import NewPost from "./NewPost.js"
-import Posts from "./Posts.js"
+import Posts from "../../components/Posts.js"
 
 const Feed = async () => {
   let posts = await getPosts()

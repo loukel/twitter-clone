@@ -1,4 +1,4 @@
-import Post from "../../components/Post.js"
+import Post from "./Post.js"
 
 // modified from https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property
 const orderByDate = (array) => {

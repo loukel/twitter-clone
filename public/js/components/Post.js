@@ -1,7 +1,13 @@
+import { formatDateTime } from "../utils/dateTime.js"
+
 const Post = ({id, createdAt, body}) => {
   // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
   const goToPost = id => {
     const params = new URLSearchParams(window.location.search)
+    // There is no need to rerender if the same post is pressed again
+    if (params.get('postId') === id) {
+      return
+    }
 
     params.set('postId', id)
     window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
@@ -26,7 +32,7 @@ const Post = ({id, createdAt, body}) => {
           </svg>
         </div>
         <h2 class="mr-5 text-lg text-gray-900 font-medium title-font mb-2">Username</h2>
-        <h4 class="text-m text-gray-900 font-medium title-font mb-2">${createdAt}</h4>
+        <h4 class="text-m text-gray-900 font-medium title-font mb-2">${formatDateTime(new Date(createdAt))}</h4>
       </div>
 
       <p class="leading-relaxed text-base">${body}</p>
