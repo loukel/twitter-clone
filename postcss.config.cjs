@@ -1,11 +1,12 @@
+/* eslint-env node */
 /*
  * Reference on how to use tailwind css with express
  * https://dev.to/jumbo02/how-to-use-tailwind-css-in-an-expressjs-app-2c7c
  */
-export default {
+module.exports = {
   plugins: [
-    import('tailwindcss'),
-    import('autoprefixer'),
-    import('cssnano'),
+    require('tailwindcss'),
+    require('autoprefixer'),
+    require('cssnano'),
   ]
 }

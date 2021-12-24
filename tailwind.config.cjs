@@ -1,4 +1,5 @@
-export default {
+/* eslint-env node */
+module.exports = {
   purge: [],
   // DarkMode can be false or 'media' or 'class'
   darkMode: false,
@@ -9,8 +10,8 @@ export default {
     extend: {},
   },
   plugins: [
-    import('tailwindcss'),
-    import('autoprefixer'),
-    import('cssnano'),
+    require('tailwindcss'),
+    require('autoprefixer'),
+    require('cssnano')
   ]
 }
