@@ -1,20 +1,20 @@
-import cuid from 'cuid'
-import fs from 'fs'
-import pluralize from 'pluralize'
+import Model from './Model.js'
 
-class Post {
+class Post extends Model {
   constructor({
     id,
+    createdAt,
+    updatedAt,
     parentId,
     body,
-    createdAt,
-    updatedAt
   }) {
-    this.id = id || cuid()
+    super({
+      id,
+      createdAt,
+      updatedAt,
+    })
     this.parentId = parentId || null
     this.body = body || null
-    this.createdAt = createdAt || new Date()
-    this.updatedAt = updatedAt || new Date()
   }
 
   include({
@@ -42,6 +42,7 @@ class Post {
   }) {
     delete data['id']
     delete data['createdAt']
+    data.updatedAt = new Date()
     Object.keys(data).forEach(key => this[key] = data[key])
     let storeObj = this.getStore()
     const index = storeObj.findIndex(item => item.id = this.id)
@@ -66,12 +67,6 @@ class Post {
     })
   }
 
-  json() {
-    let self = {}
-    Object.keys(this).forEach(key => self[key] = this[key])
-    return self
-  }
-
   static create({
     parentId,
     body,
@@ -88,18 +83,6 @@ class Post {
     storeObj.push(newPost)
     Post.replaceStore(storeObj)
     return newPost
-  }
-
-  static replaceStore(storeObj) {
-    const collectionName = pluralize(this.name.toLowerCase())
-    const newStore = JSON.stringify(storeObj)
-    fs.writeFileSync(`./database/${collectionName}.json`, newStore)
-  }
-
-  static getStore() {
-    const collectionName = pluralize(this.name.toLowerCase())
-    const store = fs.readFileSync(`./database/${collectionName}.json`)
-    return JSON.parse(store)
   }
 
   static findMany({
