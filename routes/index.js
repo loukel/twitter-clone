@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
+import express from 'express'
+import postRoutes from './postRoutes.js'
 
-const postRoutes = require('./postRoutes')
+const router = express.Router()
 
 router.use('/posts', postRoutes)
 
-module.exports = router
+export default router

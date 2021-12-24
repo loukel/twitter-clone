@@ -1,14 +1,22 @@
-const PostInput = ({elementId, placeHolder} = {elementId: '', placeHolder: ''}) => {
+const PostInput = ({
+  elementId,
+  placeHolder,
+  onSubmit,
+} = {
+  elementId: '',
+  placeHolder: '',
+  onSubmit: Function,
+}) => {
   // Prevent any character except from letters from being entered
   const handleKeyPress = () => {
     const e = self.event
     if (e.key === 'Enter') {
       e.preventDefault()
-      submitPost()
+      onSubmit()
     }
 
     if (e.key !== ' ') {
-      let re = /[a-zA-Z0-9]$/
+      let re = /[a-zA-Z0-9]$/u
       if (!re.test(e.key)) {
         e.preventDefault()
       }
@@ -26,7 +34,7 @@ const PostInput = ({elementId, placeHolder} = {elementId: '', placeHolder: ''}) 
       e.target.value = ''
     }
   }
-  
+
   window.handleKeyPress = handleKeyPress
   window.handleInput = handleInput
 
@@ -35,5 +43,5 @@ const PostInput = ({elementId, placeHolder} = {elementId: '', placeHolder: ''}) 
     class="lowercase resize-none px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"></textarea>
   `
 }
- 
+
 export default PostInput;

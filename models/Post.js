@@ -1,22 +1,42 @@
-let cuid = require('cuid')
-let fs = require('fs')
+import cuid from 'cuid'
+import fs from 'fs'
 let collectionName = 'posts'
-const collectionFile =`./database/${collectionName}.json`
+const collectionFile = `./database/${collectionName}.json`
 
-class Post{
-  constructor({id, parentId, body, createdAt, updatedAt}) {
+/**
+ * Note
+ * ESLint doesn't recognise the use of private methods in classes.
+ * Private methods are declared with a # prefix.
+ * ESLint doesn't know this.
+ * I've used the old underscore prefix to identify private functions within object oriented code
+ */
+
+class Post {
+  constructor({
+    id,
+    parentId,
+    body,
+    createdAt,
+    updatedAt
+  }) {
     this.id = id || cuid()
     this.parentId = parentId || null
     this.body = body || null
     this.createdAt = createdAt || new Date()
     this.updatedAt = updatedAt || new Date()
     if (!id) {
-      this.#create()
+      this.create()
     }
   }
 
-  include({parent, children} = {parent: false, children: false}) {
-    let obj = this.#json()
+  include({
+    parent,
+    children
+  } = {
+    parent: false,
+    children: false
+  }) {
+    let obj = this.json()
 
     if (parent) {
       obj['parent'] = this.parent()
@@ -29,20 +49,22 @@ class Post{
     return obj
   }
 
-  update({data}) {
+  update({
+    data
+  }) {
     delete data['id']
     delete data['createdAt']
     Object.keys(data).forEach(key => this[key] = data[key])
     let storeObj = this.getStore()
     const index = storeObj.findIndex(item => item.id = this.id)
-    storeObj[index] = this.#json()
-    this.#replaceStore(storeObj)
+    storeObj[index] = this.json()
+    this.replaceStore(storeObj)
   }
 
   delete() {
     let storeObj = Post.getStore()
     storeObj = storeObj.filter(item => item.id !== this.id)
-    this.#replaceStore(storeObj)
+    this.replaceStore(storeObj)
     this.id = -1
   }
 
@@ -51,22 +73,27 @@ class Post{
   }
 
   children() {
-    return Post.findMany({parentId: this.id})
+    return Post.findMany({
+      parentId: this.id
+    })
   }
 
-  #json() {
+  // Should be private function
+  json() {
     let self = {}
     Object.keys(this).forEach(key => self[key] = this[key])
     return self
   }
 
-  #create() {
+  // Should be private function
+  create() {
     let storeObj = Post.getStore()
-    storeObj.push(this.#json())
-    this.#replaceStore(storeObj)
+    storeObj.push(this.json())
+    this.replaceStore(storeObj)
   }
 
-  #replaceStore(storeObj) {
+  // Should be private function
+  replaceStore(storeObj) {
     const newStore = JSON.stringify(storeObj)
     fs.writeFileSync(collectionFile, newStore)
   }
@@ -76,7 +103,11 @@ class Post{
     return JSON.parse(store)
   }
 
-  static findMany({ parentId } = { parentId: false }) {
+  static findMany({
+    parentId
+  } = {
+    parentId: false
+  }) {
     if (parentId) {
       return this.getStore()
         .filter(item => item.parentId === parentId)
@@ -95,4 +126,4 @@ class Post{
   }
 }
 
-module.exports = Post
+export default Post

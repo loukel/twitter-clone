@@ -1,6 +1,6 @@
-const express = require('express')
-const morgan = require('morgan')
-const routes = require('./routes')
+import express from 'express'
+import morgan from 'morgan'
+import routes from './routes/index.js'
 
 // Create express app 🔨 
 const app = express()
@@ -13,8 +13,8 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use('/api/', routes)
 
-app.use ((_, res) => {
+app.use((_, res) => {
   res.status(404).send('<center style=\'font-size: 3rem;\'>Page Not Found</center>')
 })
 
-module.exports = app
+export default app

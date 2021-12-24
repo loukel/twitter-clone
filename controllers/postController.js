@@ -1,4 +1,4 @@
-let Post = require('../models/Post')
+import Post from '../models/Post.js'
 
 const get_posts = (req, res) => {
   res.status(200).send(Post.findMany())
@@ -13,7 +13,10 @@ const create_post = (req, res) => {
 const get_post = (req, res) => {
   const id = req.params.id
   const post = Post.find(id)
-  res.status(200).send(post.include({parent: true, children: true}))
+  res.status(200).send(post.include({
+    parent: true,
+    children: true
+  }))
 }
 
 const update_post = (req, res) => {
@@ -39,7 +42,7 @@ const destroy_post = (req, res) => {
   }
 }
 
-module.exports = {
+export default {
   get_posts,
   create_post,
   get_post,

@@ -4,10 +4,12 @@ const rerender = () => {
   let head = document.getElementsByTagName('head')[0]
   let script = document.getElementById('mainScript')
   head.removeChild(script)
-
   script = document.createElement('script')
-  script.src = './js/index.js?cachebuster='+ new Date().getTime()
+  // The cacheBuster param ensures that the client doesn't default to using the cached script
+  script.src = `./js/index.js?cacheBuster=${new Date().getTime()}`
   script.id = 'mainScript'
   script.type = 'module'
   head.appendChild(script)
 }
+
+window.rerender = rerender

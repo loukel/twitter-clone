@@ -1,6 +1,7 @@
-module.exports = {
+export default {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  // DarkMode can be false or 'media' or 'class'
+  darkMode: false,
   theme: {
     extend: {},
   },
@@ -8,8 +9,8 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
-    require('cssnano')
+    import('tailwindcss'),
+    import('autoprefixer'),
+    import('cssnano'),
   ]
 }

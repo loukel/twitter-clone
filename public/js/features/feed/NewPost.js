@@ -1,4 +1,6 @@
-import { createPost } from "../../services/postApi.js"
+import {
+  createPost
+} from "../../services/postApi.js"
 import Posts from "../../components/Posts.js"
 import PostInput from "../../components/PostInput.js"
 
@@ -14,10 +16,12 @@ const NewPost = (posts) => {
     let post = postInputEl.value
     if (post.length != 0 && post !== ' ') {
       post = post.replace('.', " ").replace("  ", " ")
-      const newPost = await createPost({body: post})
+      const newPost = await createPost({
+        body: post
+      })
       addPost(newPost)
       postInputEl.value = ''
-    } 
+    }
   }
 
   window.submitPost = submitPost

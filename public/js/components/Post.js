@@ -1,6 +1,12 @@
-import { formatDateTime } from "../utils/dateTime.js"
+import {
+  formatDateTime
+} from "../utils/dateTime.js"
 
-const Post = ({id, createdAt, body}) => {
+const Post = ({
+  id,
+  createdAt,
+  body
+}) => {
   // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
   const goToPost = id => {
     const params = new URLSearchParams(window.location.search)
@@ -11,7 +17,7 @@ const Post = ({id, createdAt, body}) => {
 
     params.set('postId', id)
     window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
-    rerender()
+    window.rerender()
   }
 
   window.goToPost = goToPost

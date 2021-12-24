@@ -1,4 +1,7 @@
-import { createPost, getPost } from "../../services/postApi.js"
+import {
+  createPost,
+  getPost
+} from "../../services/postApi.js"
 import Post from "../../components/Post.js"
 import Posts from "../../components/Posts.js"
 import PostInput from "../../components/PostInput.js"
@@ -18,7 +21,10 @@ const PostView = async (id) => {
     let reply = replyInputEl.value
     if (reply.length != 0 && reply !== ' ') {
       reply = reply.replace('.', " ").replace("  ", " ")
-      const newReply = await createPost({body: reply, parentId: id})
+      const newReply = await createPost({
+        body: reply,
+        parentId: id
+      })
       addChild(newReply)
       replyInputEl.value = ''
     }

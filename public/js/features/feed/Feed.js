@@ -1,4 +1,6 @@
-import { getPosts } from "../../services/postApi.js"
+import {
+  getPosts
+} from "../../services/postApi.js"
 import NewPost from "./NewPost.js"
 import Posts from "../../components/Posts.js"
 
