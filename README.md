@@ -16,7 +16,7 @@ This web app is a social media inspired by Twitter, posts are not allowed to inc
 
 -Front-end renderer inspired by [React](https://reactjs.org/).
 
--Back-end Models inspired by Laravel, MVC architecture, JSON database inspired by MongoDB
+-Back-end Models inspired by Laravel, MVC architecture and Prisma, JSON database inspired by MongoDB
 
 ## Styling
 

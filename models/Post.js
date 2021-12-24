@@ -1,15 +1,6 @@
 import cuid from 'cuid'
 import fs from 'fs'
-let collectionName = 'posts'
-const collectionFile = `./database/${collectionName}.json`
-
-/**
- * Note
- * ESLint doesn't recognise the use of private methods in classes.
- * Private methods are declared with a # prefix.
- * ESLint doesn't know this.
- * I've used the old underscore prefix to identify private functions within object oriented code
- */
+import pluralize from 'pluralize'
 
 class Post {
   constructor({
@@ -24,9 +15,6 @@ class Post {
     this.body = body || null
     this.createdAt = createdAt || new Date()
     this.updatedAt = updatedAt || new Date()
-    if (!id) {
-      this.create()
-    }
   }
 
   include({
@@ -58,13 +46,13 @@ class Post {
     let storeObj = this.getStore()
     const index = storeObj.findIndex(item => item.id = this.id)
     storeObj[index] = this.json()
-    this.replaceStore(storeObj)
+    Post.replaceStore(storeObj)
   }
 
   delete() {
     let storeObj = Post.getStore()
     storeObj = storeObj.filter(item => item.id !== this.id)
-    this.replaceStore(storeObj)
+    Post.replaceStore(storeObj)
     this.id = -1
   }
 
@@ -78,28 +66,39 @@ class Post {
     })
   }
 
-  // Should be private function
   json() {
     let self = {}
     Object.keys(this).forEach(key => self[key] = this[key])
     return self
   }
 
-  // Should be private function
-  create() {
+  static create({
+    parentId,
+    body,
+    createdAt,
+    updatedAt
+  }) {
     let storeObj = Post.getStore()
-    storeObj.push(this.json())
-    this.replaceStore(storeObj)
+    let newPost = new Post({
+      parentId,
+      body,
+      createdAt,
+      updatedAt,
+    })
+    storeObj.push(newPost)
+    Post.replaceStore(storeObj)
+    return newPost
   }
 
-  // Should be private function
-  replaceStore(storeObj) {
+  static replaceStore(storeObj) {
+    const collectionName = pluralize(this.name.toLowerCase())
     const newStore = JSON.stringify(storeObj)
-    fs.writeFileSync(collectionFile, newStore)
+    fs.writeFileSync(`./database/${collectionName}.json`, newStore)
   }
 
   static getStore() {
-    const store = fs.readFileSync(collectionFile)
+    const collectionName = pluralize(this.name.toLowerCase())
+    const store = fs.readFileSync(`./database/${collectionName}.json`)
     return JSON.parse(store)
   }
 

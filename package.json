@@ -29,6 +29,7 @@
     "install": "^0.13.0",
     "morgan": "^1.10.0",
     "npm": "^8.2.0",
+    "pluralize": "^8.0.0",
     "postcss": "^8.4.4",
     "postcss-cli": "^9.0.2",
     "tailwindcss": "^2.2.19"
