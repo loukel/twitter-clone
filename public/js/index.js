@@ -14,11 +14,18 @@ const main = async () => {
 
   const rootEl = document.getElementById('root')
 
+  let page = ''
   if (!postId) {
-    rootEl.innerHTML = await Feed()
+    page = await Feed()
   } else {
-    rootEl.innerHTML = await PostView(postId)
+    page = await PostView(postId)
   }
+
+  rootEl.innerHTML = `
+    <section class='body-font relative'>
+      ${page}
+    </section>
+  `
 }
 
 main()
