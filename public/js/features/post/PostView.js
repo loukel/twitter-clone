@@ -33,9 +33,6 @@ const PostView = async (id) => {
   window.submitReply = submitReply
 
   return `
-    <button onclick='goHome()' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute top-1 left-1'>
-      back to feed
-    </button>
     <div class="container px-5 py-24 mx-auto">
       ${post.parentId ? `<span class='mr-2'>replying to</span><span onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
       ${Post(post)}

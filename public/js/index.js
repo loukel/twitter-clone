@@ -1,3 +1,5 @@
+import Navbar from "./components/Navbar.js"
+import AuthModal from "./features/auth/AuthModel.js"
 import Feed from "./features/feed/Feed.js"
 import PostView from "./features/post/PostView.js"
 
@@ -22,7 +24,9 @@ const main = async () => {
   }
 
   rootEl.innerHTML = `
-    <section class='body-font relative'>
+    ${Navbar()}
+    ${AuthModal()}
+    <section class='body-font'>
       ${page}
     </section>
   `
