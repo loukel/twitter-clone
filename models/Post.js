@@ -5,6 +5,7 @@ class Post extends Model {
     id,
     createdAt,
     updatedAt,
+    userId,
     parentId,
     body,
   }) {
@@ -14,15 +15,16 @@ class Post extends Model {
       updatedAt,
     })
     this.parentId = parentId || null
-    this.body = body || null
+    this.body = body
+    this.userId = userId
   }
 
   include({
     parent,
-    children
+    children,
   } = {
     parent: false,
-    children: false
+    children: false,
   }) {
     let obj = this.json()
 
@@ -57,6 +59,7 @@ class Post extends Model {
   static create({
     parentId,
     body,
+    userId,
     createdAt,
     updatedAt
   }) {
@@ -64,6 +67,7 @@ class Post extends Model {
     let newPost = new Post({
       parentId,
       body,
+      userId,
       createdAt,
       updatedAt,
     })

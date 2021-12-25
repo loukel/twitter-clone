@@ -1,28 +1,17 @@
-import "../firebase.js"
-import FireIcon from "../resources/fireIcon.js"
 import {
   getAuth,
-  createUserWithEmailAndPassword,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
+import "../firebase.js"
+import FireIcon from "../resources/fireIcon.js"
 
 // Navbar modified from https://flowbite.com/docs/components/navbar/ 
 const Navbar = () => {
   const auth = getAuth()
-  const user = null
+  const user = auth.currentUser
 
   window.toggleUserDropDown = () => {
     document.getElementById('dropdown').classList.toggle('hidden')
-  }
-
-  window.login = () => {
-    const email = 'louis.kelly2@hotmail.com'
-    const password = 'password'
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user)
-      })
   }
 
   return `
@@ -38,13 +27,13 @@ const Navbar = () => {
           ${user 
               ? `
                   <button id="dropdownButton" onClick='toggleUserDropDown()' type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
-                    <img class="w-8 h-8 rounded-full" src="http://lorempixel.com/640/480/nature" alt="user photo">
+                    <img class="w-10 h-10 rounded-full" src="${user.photoURL}" alt="user photo">
                   </button>
                   <!-- Dropdown menu -->
                   <div class="hidden absolute top-10 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
                     <div class="py-3 px-4">
-                      <span class="block text-sm text-gray-900 dark:text-white">Full Name</span>
-                      <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">user@email.com</span>
+                      <span class="block text-sm text-gray-900 dark:text-white">${user.displayName}</span>
+                      <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">${user.email}</span>
                     </div>
                     <ul class="py-1" aria-labelledby="dropdown">
                       <li>
@@ -60,15 +49,20 @@ const Navbar = () => {
                   </div>
                 `
               : `
-                <button onClick='showAuthModal()'>
-                  login/register
+              <div class='justify-between'>
+                <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick='showLoginModal()'>
+                  login
                 </button>
+                <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick='showRegisterModal()'>
+                  register
+                </button>
+              </div>
               `
             }
           </div>
         </div>
       </div>
-    </nav>
+    </nav>  
   `
 }
 
