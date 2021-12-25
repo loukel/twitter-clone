@@ -1,4 +1,4 @@
-import Post from '../models/Post.js'
+import Post from './models/Post.js'
 
 let post1 = new Post({
   body: 'cool post'

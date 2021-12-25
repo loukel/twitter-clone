@@ -37,19 +37,6 @@ class Post extends Model {
     return obj
   }
 
-  update({
-    data
-  }) {
-    delete data['id']
-    delete data['createdAt']
-    data.updatedAt = new Date()
-    Object.keys(data).forEach(key => this[key] = data[key])
-    let storeObj = this.getStore()
-    const index = storeObj.findIndex(item => item.id = this.id)
-    storeObj[index] = this.json()
-    Post.replaceStore(storeObj)
-  }
-
   delete() {
     let storeObj = Post.getStore()
     storeObj = storeObj.filter(item => item.id !== this.id)

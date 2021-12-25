@@ -26,16 +26,6 @@ describe('Test post endpoints', () => {
     return expect(res.status).toBe(200)
   })
 
-  // Update_post
-  test('PUT /api/posts/:id succeeds', async () => {
-    const data = {
-      "body": "Lorem301",
-    }
-    const res = await request(app).put(`/api/posts/${postId}`)
-      .send(data)
-    return expect(res.status).toBe(204)
-  })
-
   // Delete_post
   test('DELETE /api/posts/:id succeeds', async () => {
     const res = await request(app).delete(`/api/posts/${postId}`)

@@ -19,18 +19,6 @@ const get_post = (req, res) => {
   }))
 }
 
-const update_post = (req, res) => {
-  const id = req.params.id
-  const data = req.body
-  let post = Post.find(id)
-  if (post === -1) {
-    res.sendStatus(404)
-  } else {
-    post.update(data)
-    res.sendStatus(204)
-  }
-}
-
 const destroy_post = (req, res) => {
   const id = req.params.id
   let post = Post.find(id)
@@ -46,6 +34,5 @@ export default {
   get_posts,
   create_post,
   get_post,
-  update_post,
   destroy_post,
 }
