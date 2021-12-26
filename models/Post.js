@@ -65,9 +65,10 @@ class Post extends Model {
   }
 
   async user() {
+    const userId = this.userId
     const userRecord = await admin
       .auth()
-      .getUser(this.userId)
+      .getUser(`${userId}`)
     return userRecord
   }
 

@@ -1,12 +1,10 @@
 import Post from './models/Post.js'
 
-let post1 = new Post({
+let post1 = Post.create({
   body: 'cool post'
 })
 
-new Post({
+Post.create({
   parentId: post1.id,
   body: 'cool post 2'
 })
-
-console.log(Post.find(post1.id))

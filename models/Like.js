@@ -29,7 +29,14 @@ class Like extends Model {
     let obj = this.json()
 
     if (post) {
-      obj['post'] = this.post()
+      let postObj = this.post()
+      if (post.include.user) {
+        postObj = await postObj.include({
+          user: true
+        })
+      }
+
+      obj['post'] = postObj
     }
 
     if (user) {
@@ -53,7 +60,7 @@ class Like extends Model {
   async user() {
     const userRecord = await admin
       .auth()
-      .getUser(this.userId)
+      .getUser(`${this.userId}`)
     return userRecord
   }
 
