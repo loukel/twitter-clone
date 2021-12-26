@@ -26,7 +26,7 @@ const destroy_like = (req, res) => {
     res.sendStatus(404)
   } else {
     like.delete()
-    res.sendStatus(204)
+    res.status(200).send(like)
   }
 }
 

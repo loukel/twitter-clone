@@ -23,8 +23,9 @@ const Post = ({
   let likeCount = likes.length
 
   let liked = false
+  let like = null
   if (currentUser && likeCount !== 0) {
-    const like = likes.filter((like) => like.userId === currentUser.uid)
+    [like] = likes.filter((like) => like.userId === currentUser.uid)
     if (like) {
       liked = true
     }
@@ -33,6 +34,7 @@ const Post = ({
   return `
     <div 
       class="border border-gray-200 bg-white p-6 rounded-lg mb-3 cursor-pointer"
+      ${currentUser ? '' : `onClick="goToPost('${id}')"`}
     >
       <!-- Modified from https://tailblocks.cc/ -->
       <div class='flex relative'>
@@ -49,7 +51,7 @@ const Post = ({
         ? `
           <div class='grid grid-cols-${replyButton ? 2 : 1}'>
             <button 
-              onClick="likePost('${id}')" 
+              onClick="${liked ? `removeLike('${like.id}')` : `likePost('${id}')`}" 
               id='likeBtn-${id}' 
               class='py-2 px-4 border ${liked 
                 ? 'font-bold bg-blue-700 text-white'

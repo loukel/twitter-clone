@@ -43,7 +43,7 @@ const createLike = async (body) => {
 const destroyLike = id => fetch(`/api/likes/${id}`, {
     method: 'DELETE',
   })
-  .then(() => true)
+  .then(res => res.json())
   .catch(error => {
     console.error(error)
     return false

@@ -40,7 +40,7 @@ const destroy_post = (req, res) => {
     res.sendStatus(404)
   } else {
     post.delete()
-    res.sendStatus(204)
+    res.status(200).send(post)
   }
 }
 

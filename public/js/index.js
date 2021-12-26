@@ -4,7 +4,8 @@ import RegisterModal from "./features/auth/RegisterModal.js"
 import Feed from "./features/feed/Feed.js"
 import PostView from "./features/post/PostView.js"
 import {
-  createLike
+  createLike,
+  destroyLike
 } from "./services/likeApi.js"
 
 const parameters = new URLSearchParams(window.location.search)
@@ -15,7 +16,7 @@ const main = async () => {
     createLike({
         postId,
       })
-      .then(() => {
+      .then(like => {
         // Update like button on post to display that it has been liked
         const likeButtonEl = document.getElementById(`likeBtn-${postId}`)
         likeButtonEl.innerHTML = 'liked'
@@ -23,11 +24,33 @@ const main = async () => {
         likeButtonEl.classList.add('font-bold')
         likeButtonEl.classList.add('bg-blue-700')
         likeButtonEl.classList.add('text-white')
+        likeButtonEl.setAttribute('onclick', `removeLike('${like.id}')`)
 
         // Increment like counter on post element
         const likeCounterEl = document.getElementById(`likeCounter-${postId}`)
         let count = Number(likeCounterEl.dataset.count)
         count += 1
+        likeCounterEl.dataset.count = count
+        likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
+      })
+  }
+
+  window.removeLike = (likeId) => {
+    destroyLike(likeId)
+      .then(like => {
+        // Update like button on post to display that it has been liked
+        const likeButtonEl = document.getElementById(`likeBtn-${like.postId}`)
+        likeButtonEl.innerHTML = 'like'
+        likeButtonEl.classList.add('font-semibold')
+        likeButtonEl.classList.remove('font-bold')
+        likeButtonEl.classList.remove('bg-blue-700')
+        likeButtonEl.classList.remove('text-white')
+        likeButtonEl.setAttribute('onclick', `likePost('${like.postId}')`)
+
+        // Increment like counter on post element
+        const likeCounterEl = document.getElementById(`likeCounter-${like.postId}`)
+        let count = Number(likeCounterEl.dataset.count)
+        count -= 1
         likeCounterEl.dataset.count = count
         likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
       })
