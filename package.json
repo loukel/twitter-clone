@@ -29,6 +29,7 @@
     "cssnano": "^5.0.14",
     "cuid": "^2.1.8",
     "express": "^4.17.1",
+    "firebase-admin": "^10.0.1",
     "install": "^0.13.0",
     "morgan": "^1.10.0",
     "npm": "^8.2.0",

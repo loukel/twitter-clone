@@ -1,3 +1,4 @@
+import admin from '../lib/firebaseAdmin.js'
 import Model from './Model.js'
 
 class Post extends Model {
@@ -20,12 +21,14 @@ class Post extends Model {
   }
 
   // Include user details as well
-  include({
+  async include({
     parent,
     children,
+    user,
   } = {
     parent: false,
     children: false,
+    user: false,
   }) {
     let obj = this.json()
 
@@ -34,7 +37,11 @@ class Post extends Model {
     }
 
     if (children) {
-      obj['children'] = this.children()
+      obj['children'] = await this.children()
+    }
+
+    if (user) {
+      obj['user'] = await this.user()
     }
 
     return obj
@@ -51,10 +58,18 @@ class Post extends Model {
     return Post.find(this.parentId)
   }
 
-  children() {
-    return Post.findMany({
+  async children() {
+    const posts = await Post.findMany({
       parentId: this.id
     })
+    return posts
+  }
+
+  async user() {
+    const userRecord = await admin
+      .auth()
+      .getUser(this.userId)
+    return userRecord
   }
 
   static create({
@@ -77,17 +92,28 @@ class Post extends Model {
     return newPost
   }
 
-  static findMany({
-    parentId
+  static async findMany({
+    parentId,
+    include,
   } = {
-    parentId: false
+    parentId: false,
+    include: {
+      parent: false,
+      children: false,
+      user: false,
+    },
   }) {
+    let posts = this.getStore()
     if (parentId) {
-      return this.getStore()
-        .filter(item => item.parentId === parentId)
-        .map(post => new Post(post))
+      posts = posts.filter(item => item.parentId === parentId)
     }
-    return this.getStore().map(post => new Post(post))
+    posts = posts.map(post => new Post(post))
+    for (let index = 0; index < posts.length; index += 1) {
+      posts[index] = await posts[index].include({
+        ...include
+      })
+    }
+    return posts
   }
 
   static find(id) {

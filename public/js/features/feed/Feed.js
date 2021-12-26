@@ -19,7 +19,7 @@ const Feed = async () => {
           ? NewPost(posts)
           : `
             <span>
-              <span onClick='showLogin()' class='cursor-pointer hover:underline text-blue-700'>login</span> or <span onClick='showRegister()' class='cursor-pointer hover:underline text-blue-700'>register</span> to post
+              <span onClick='showLoginModal()' class='cursor-pointer hover:underline text-blue-700'>login</span> or <span onClick='showRegisterModal()' class='cursor-pointer hover:underline text-blue-700'>register</span> to post
             </span>
           `
       }

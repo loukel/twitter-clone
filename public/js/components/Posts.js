@@ -9,6 +9,7 @@ const Posts = (posts) => orderByDate(posts)
     body: post.body,
     createdAt: post.createdAt,
     userId: post.userId,
+    user: post.user
   }))
   .join('')
 

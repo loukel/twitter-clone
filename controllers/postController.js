@@ -1,22 +1,33 @@
 import Post from '../models/Post.js'
 
-const get_posts = (req, res) => {
-  res.status(200).send(Post.findMany())
+const get_posts = async (req, res) => {
+  res.status(200).send(await Post.findMany({
+    include: {
+      user: true,
+    }
+  }))
 }
 
-const create_post = (req, res) => {
+const create_post = async (req, res) => {
   const data = req.body
   let post = Post.create(data)
-  res.status(201).send(post)
+  res.status(201).send(await post.include({
+    user: true
+  }))
 }
 
-const get_post = (req, res) => {
+const get_post = async (req, res) => {
   const id = req.params.id
   const post = Post.find(id)
-  res.status(200).send(post.include({
-    parent: true,
-    children: true
-  }))
+  if (post) {
+    res.status(200).send(await post.include({
+      parent: true,
+      children: true,
+      user: true,
+    }))
+  } else {
+    res.sendStatus(404)
+  }
 }
 
 const destroy_post = (req, res) => {
