@@ -1,6 +1,8 @@
 import {
   getAuth,
   signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
@@ -25,13 +27,17 @@ const LoginModal = () => {
     self.event.preventDefault()
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
-    signInWithEmailAndPassword(auth, email, password)
+    // Persistence doesn't work
+    setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        window.rerender()
-      })
-      .catch(() => {
-        document.getElementById('loginErrorMessage').innerHTML = "Incorrect email/password combination entered or account doesn't exist"
-        document.getElementById('loginErrorAlert').classList.remove('hidden')
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            window.rerender()
+          })
+          .catch(() => {
+            document.getElementById('loginErrorMessage').innerHTML = "Incorrect email/password combination entered or account doesn't exist"
+            document.getElementById('loginErrorAlert').classList.remove('hidden')
+          })
       })
   }
 

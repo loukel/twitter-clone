@@ -70,7 +70,7 @@ main()
 
 /*
  * Like posts -/
- * Display liked posts
+ * Display liked posts -/
  * Number of users who liked a post -/
  * Unlike posts
  * Reply to posts with a button -/
