@@ -1,5 +1,6 @@
 import admin from '../lib/firebaseAdmin.js'
 import Model from './Model.js'
+import Like from './Like.js'
 
 class Post extends Model {
   constructor({
@@ -24,10 +25,12 @@ class Post extends Model {
     parent,
     children,
     user,
+    likes,
   } = {
     parent: false,
     children: false,
     user: false,
+    likes: false,
   }) {
     let obj = this.json()
 
@@ -41,6 +44,10 @@ class Post extends Model {
 
     if (user) {
       obj['user'] = await this.user()
+    }
+
+    if (likes) {
+      obj['likes'] = await this.likes()
     }
 
     return obj
@@ -72,6 +79,13 @@ class Post extends Model {
     return userRecord
   }
 
+  async likes() {
+    const likes = await Like.findMany({
+      postId: this.id
+    })
+    return likes
+  }
+
   static create({
     parentId,
     body,
@@ -97,6 +111,7 @@ class Post extends Model {
       parent: false,
       children: false,
       user: false,
+      likes: false,
     },
   }) {
     let posts = this.getStore()

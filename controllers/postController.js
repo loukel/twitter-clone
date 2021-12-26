@@ -4,6 +4,7 @@ const get_posts = async (req, res) => {
   res.status(200).send(await Post.findMany({
     include: {
       user: true,
+      likes: true,
     }
   }))
 }
@@ -24,6 +25,7 @@ const get_post = async (req, res) => {
       parent: true,
       children: true,
       user: true,
+      likes: true,
     }))
   } else {
     res.sendStatus(404)

@@ -57,10 +57,10 @@ const Navbar = () => {
                 `
               : `
               <div class='justify-between'>
-                <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick='showLoginModal()'>
+                <button class='pill pill-blue' onClick='showLoginModal()'>
                   login
                 </button>
-                <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick='showRegisterModal()'>
+                <button class='pill pill-blue' onClick='showRegisterModal()'>
                   register
                 </button>
               </div>

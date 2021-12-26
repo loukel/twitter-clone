@@ -12,6 +12,7 @@ from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
 const PostView = async (id) => {
   let post = await getPost(id)
+
   if (!post) {
     window.goHome()
   }
@@ -25,7 +26,7 @@ const PostView = async (id) => {
     repliesEl.innerHTML = Posts(post.children)
   }
 
-  const submitReply = async () => {
+  window.submitReply = async () => {
     const replyInputEl = document.getElementById('replyInput')
     let reply = replyInputEl.value
     if (reply.length != 0 && reply !== ' ') {
@@ -38,13 +39,11 @@ const PostView = async (id) => {
       replyInputEl.value = ''
     }
   }
-  console.log(post.children)
-  window.submitReply = submitReply
 
   return `
     <div class="container px-5 py-12 mx-auto">
       ${post.parentId ? `<span class='mr-2'>replying to</span><span onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
-      ${Post(post)}
+      ${Post(post, {replyButton: false})}
       ${user 
         ? `
           <div class="mb-3 pt-0 flex">
@@ -56,7 +55,7 @@ const PostView = async (id) => {
         `
         : `
           <span>
-            <span onClick='showLoginModal()' class='cursor-pointer hover:underline text-blue-700'>login</span> or <span onClick='showRegisterModal()' class='cursor-pointer hover:underline text-blue-700'>register</span> to post
+            <span onClick='showLoginModal()' class='cursor-pointer hover:underline text-blue-700'>login</span> or <span onClick='showRegisterModal()' class='cursor-pointer hover:underline text-blue-700'>register</span> to reply and like
           </span>
         `
       }
