@@ -20,7 +20,6 @@ class Post extends Model {
     this.userId = userId
   }
 
-  // Include user details as well
   async include({
     parent,
     children,
@@ -76,16 +75,12 @@ class Post extends Model {
     parentId,
     body,
     userId,
-    createdAt,
-    updatedAt
   }) {
     let storeObj = Post.getStore()
     let newPost = new Post({
       parentId,
       body,
       userId,
-      createdAt,
-      updatedAt,
     })
     storeObj.push(newPost)
     Post.replaceStore(storeObj)
