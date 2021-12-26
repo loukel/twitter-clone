@@ -7,7 +7,8 @@ const Posts = (posts) => orderByDate(posts)
   .map(post => Post({
     id: post.id,
     body: post.body,
-    createdAt: post.createdAt
+    createdAt: post.createdAt,
+    userId: post.userId,
   }))
   .join('')
 
