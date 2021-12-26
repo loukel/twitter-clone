@@ -20,7 +20,15 @@ const Post = ({
   const auth = getAuth()
   const currentUser = auth.currentUser
 
-  const liked = currentUser && likes.filter((like) => like.userId === currentUser.uid).length !== 0
+  let likeCount = likes.length
+
+  let liked = false
+  if (currentUser && likeCount !== 0) {
+    const like = likes.filter((like) => like.userId === currentUser.uid)
+    if (like) {
+      liked = true
+    }
+  }
 
   return `
     <div 
@@ -33,7 +41,7 @@ const Post = ({
         </div>
         <h2 class="mr-5 text-lg text-gray-900 font-medium title-font mb-2">${user.displayName} <small>${user.email}</small></h2>
         <h4 class="text-m text-gray-900 font-medium title-font mb-2">${formatDateTime(new Date(createdAt))}</h4>
-        <h4 class="text-semibold absolute top-0 right-0" id='likeCounter-${id}' data-count='${likes.length}'>${likes.length} like${likes.length !== 1 ? 's' : ''}</h4>
+        <h4 class="text-semibold absolute top-0 right-0" id='likeCounter-${id}' data-count='${likeCount}'>${likeCount} like${likeCount !== 1 ? 's' : ''}</h4>
       </div>
 
       <p class="leading-relaxed text-base">${body}</p>

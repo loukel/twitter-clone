@@ -8,8 +8,8 @@ const Posts = (posts) => orderByDate(posts)
     id: post.id,
     body: post.body,
     createdAt: post.createdAt,
-    userId: post.userId,
-    user: post.user
+    user: post.user,
+    likes: post.likes,
   }))
   .join('')
 

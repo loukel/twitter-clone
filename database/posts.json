@@ -1,1 +1,15 @@
-[{"id":"ckxng6f310000wouddkqo0k3o","createdAt":"2021-12-26T16:09:54.398Z","updatedAt":"2021-12-26T16:09:54.398Z","parentId":null,"body":"this is a cool post 222","userId":"1"},{"id":"ckxng6jm00001woud6jnedlxx","createdAt":"2021-12-26T16:10:00.265Z","updatedAt":"2021-12-26T16:10:00.265Z","parentId":null,"body":"asdasdasdas","userId":"1"}]
+[{
+  "id": "ckxns6p1k0000kwudc7rt0mpg",
+  "createdAt": "2021-12-26T21:46:02.696Z",
+  "updatedAt": "2021-12-26T21:46:02.696Z",
+  "parentId": null,
+  "body": "asdasdasd",
+  "userId": "1"
+}, {
+  "id": "ckxns6q20000050udek13dd4b",
+  "createdAt": "2021-12-26T21:46:04.008Z",
+  "updatedAt": "2021-12-26T21:46:04.008Z",
+  "parentId": null,
+  "body": "asdasdasd",
+  "userId": "1"
+}]

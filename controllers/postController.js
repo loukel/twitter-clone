@@ -1,12 +1,13 @@
 import Post from '../models/Post.js'
 
 const get_posts = async (req, res) => {
-  res.status(200).send(await Post.findMany({
+  const posts = await Post.findMany({
     include: {
       user: true,
       likes: true,
     }
-  }))
+  })
+  res.status(200).send(posts)
 }
 
 const create_post = async (req, res) => {
