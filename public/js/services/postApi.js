@@ -29,7 +29,12 @@ const createPost = async (body) => {
 }
 
 const getPost = async (id) => {
-  const post = await fetch(`/api/posts/${id}`).then(res => res.json())
+  const post = await fetch(`/api/posts/${id}`)
+    .then(res => res.json())
+    .catch(error => {
+      console.error(error)
+      return false
+    })
 
   return post
 }

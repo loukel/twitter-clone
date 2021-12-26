@@ -12,6 +12,9 @@ from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
 const PostView = async (id) => {
   let post = await getPost(id)
+  if (!post) {
+    window.goHome()
+  }
   const auth = getAuth()
   const user = auth.currentUser
 
@@ -39,7 +42,7 @@ const PostView = async (id) => {
   window.submitReply = submitReply
 
   return `
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 py-12 mx-auto">
       ${post.parentId ? `<span class='mr-2'>replying to</span><span onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
       ${Post(post)}
       ${user 
@@ -57,10 +60,15 @@ const PostView = async (id) => {
           </span>
         `
       }
-      <h5 class='text-xl font-medium leading-tight mt-0 mb-2 text-blue-600'>replies</h5>
-      <div id='replies' class="mb-3 pt-0">
-        ${Posts(post.children)}
-      </div>
+      ${post.children.length
+          ? `
+            <h5 class='text-xl font-medium leading-tight mt-0 mb-2 text-blue-600'>replies</h5>
+            <div id='replies' class="mb-3 pt-0">
+              ${Posts(post.children)}
+            </div>
+          `
+          : ''
+        }
     </div>
   `
 }
