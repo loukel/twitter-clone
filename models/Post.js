@@ -19,6 +19,7 @@ class Post extends Model {
     this.userId = userId
   }
 
+  // Include user details as well
   include({
     parent,
     children,
