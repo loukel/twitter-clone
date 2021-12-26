@@ -5,14 +5,14 @@ const PostInput = ({
 } = {
   elementId: '',
   placeHolder: '',
-  onSubmit: Function,
+  onSubmit: null,
 }) => {
   // Prevent any character except from letters from being entered
   const handleKeyPress = () => {
     const e = self.event
     if (e.key === 'Enter') {
       e.preventDefault()
-      onSubmit()
+      window[onSubmit]()
     }
 
     if (e.key !== ' ') {

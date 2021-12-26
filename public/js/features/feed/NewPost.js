@@ -28,7 +28,7 @@ const NewPost = (posts) => {
 
   return `
     <div class="mb-3 pt-0 flex">
-      ${PostInput({ elementId: 'postInput', placeHolder: 'what are you thinking'})}
+      ${PostInput({ elementId: 'postInput', placeHolder: 'what are you thinking', onSubmit: 'submitPost'})}
       <button onClick='submitPost()' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
         post
       </button>
