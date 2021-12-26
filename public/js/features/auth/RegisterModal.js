@@ -22,6 +22,7 @@ const RegisterModal = () => {
   }
 
   window.submitRegister = () => {
+    self.event.preventDefault()
     const fullName = document.getElementById('registerFullName').value
     const email = document.getElementById('registerEmail').value
     const password = document.getElementById('registerPassword').value
@@ -29,14 +30,14 @@ const RegisterModal = () => {
 
     if (password === passwordConfirm) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(userCredential => {
           const user = userCredential.user
           updateProfile(user, {
             displayName: fullName,
             photoURL: `https://eu.ui-avatars.com/api/?background=random&name=${fullName.split(' ').join('+')}`
+          }).then(() => {
+            window.rerender()
           })
-
-          window.rerender()
         })
     }
   }
@@ -50,7 +51,7 @@ const RegisterModal = () => {
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div class="bg-white px-4 py-8 pb-4 rounded sm:p-6 sm:pb-4">
+          <form onSubmit='submitRegister()' class="bg-white px-4 py-8 pb-4 rounded sm:p-6 sm:pb-4">
             <h1 class="mb-8 text-3xl text-center">Register</h1>
             <input
                 type="text"
@@ -77,7 +78,6 @@ const RegisterModal = () => {
 
             <button
               type="submit"
-              onClick='submitRegister()'
               class="w-full text-center py-3 rounded bg-blue-700 text-white hover:bg-green-dark focus:outline-none my-1"
             >
               Register
@@ -86,7 +86,7 @@ const RegisterModal = () => {
             <div class="text-center text-sm text-grey-dark mt-4 cursor-pointer">
               <a onClick='showLoginModal()'>Already got an account?</a>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

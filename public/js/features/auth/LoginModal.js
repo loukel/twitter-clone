@@ -17,6 +17,7 @@ const LoginModal = () => {
   }
 
   window.submitLogin = () => {
+    self.event.preventDefault()
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
     signInWithEmailAndPassword(auth, email, password)
@@ -34,7 +35,7 @@ const LoginModal = () => {
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div class="bg-white px-4 py-8 pb-4 rounded sm:p-6 sm:pb-4">
+          <form class="bg-white px-4 py-8 pb-4 rounded sm:p-6 sm:pb-4" onSubmit='submitLogin()'>
             <h1 class="mb-8 text-3xl text-center">Login</h1>
             <input 
                 type="text"
@@ -49,16 +50,15 @@ const LoginModal = () => {
                 name="password"
                 placeholder="Password" />
             <button
-                type="submit"
-                onClick='submitLogin()'
-                class="w-full text-center py-3 rounded bg-blue-700 text-white hover:bg-green-dark focus:outline-none my-1"
+              type="submit"
+              class="w-full text-center py-3 rounded bg-blue-700 text-white hover:bg-green-dark focus:outline-none my-1"
             >
               Login
             </button>
             <div class="text-center text-sm text-grey-dark mt-4 cursor-pointer">
               <a onClick='showRegisterModal()'>Not got an account?</a>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
