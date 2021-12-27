@@ -58,16 +58,32 @@ const main = async () => {
 
   // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
   window.goToPost = id => {
-    const params = new URLSearchParams(window.location.search)
+    fetch('/')
+      .then(() => {
+        const params = new URLSearchParams(window.location.search)
 
-    params.set('postId', id)
-    window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
-    window.rerender()
+        params.set('postId', id)
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
+        window.rerender()
+      })
+      .catch(error => {
+        console.error(error)
+        console.error('Server has disconnected!')
+        alert('Server has disconnected!')
+      })
   }
 
   window.goHome = () => {
-    window.history.pushState({}, document.title, window.location.pathname)
-    window.rerender()
+    fetch('/')
+      .then(() => {
+        window.history.pushState({}, document.title, window.location.pathname)
+        window.rerender()
+      })
+      .catch(error => {
+        console.error(error)
+        console.error('Server has disconnected!')
+        alert('Server has disconnected!')
+      })
   }
 
   const rootEl = document.getElementById('root')

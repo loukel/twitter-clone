@@ -123,7 +123,7 @@
         "multiline-comment-style": "error",
         "new-parens": "error",
         "newline-per-chained-call": "error",
-        "no-alert": "error",
+        "no-alert": 0,
         "no-array-constructor": "error",
         "no-await-in-loop": 0,
         "no-bitwise": "error",

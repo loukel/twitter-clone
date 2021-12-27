@@ -14,7 +14,8 @@ const create_post = async (req, res) => {
   const data = req.body
   let post = Post.create(data)
   res.status(201).send(await post.include({
-    user: true
+    user: true,
+    likes: true,
   }))
 }
 
