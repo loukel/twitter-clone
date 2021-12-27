@@ -104,9 +104,11 @@ class Post extends Model {
 
   static async findMany({
     parentId,
+    userId,
     include,
   } = {
     parentId: false,
+    userId: false,
     include: {
       parent: false,
       children: false,
@@ -117,6 +119,9 @@ class Post extends Model {
     let posts = this.getStore()
     if (parentId) {
       posts = posts.filter(item => item.parentId === parentId)
+    }
+    if (userId) {
+      posts = posts.filter(item => item.userId === userId)
     }
     posts = posts.map(post => new Post(post))
     for (let index = 0; index < posts.length; index += 1) {

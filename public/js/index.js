@@ -92,13 +92,7 @@ const main = async () => {
 main()
 
 /*
- * Like posts -/
- * Display liked posts -/
- * Number of users who liked a post -/
- * Unlike posts
- * Reply to posts with a button -/
- * Search users
- * See all the posts of a user -> profile
+ * Search users /users
+ * User profile -> see all the posts of a user /user/:id
  * Get all posts the user has liked -> likes
- * Delete post
  */

@@ -30,7 +30,7 @@ class Like extends Model {
 
     if (post) {
       let postObj = this.post()
-      if (post.include.user) {
+      if (post.include && post.include.user) {
         postObj = await postObj.include({
           user: true
         })
@@ -83,14 +83,19 @@ class Like extends Model {
     userId,
     include,
   } = {
-    postId: null,
-    userId: null,
+    postId: -1,
+    userId: false,
     include: {
-      post: false,
+      post: {
+        include: {
+          user: true,
+        }
+      },
       user: false,
     },
   }) {
     let likes = this.getStore()
+
     if (postId) {
       likes = likes.filter(item => item.postId === postId)
     }
@@ -99,9 +104,9 @@ class Like extends Model {
       likes = likes.filter(item => item.userId === userId)
     }
 
-    likes = likes.map(like => new Like(like))
     for (let index = 0; index < likes.length; index += 1) {
-      likes[index] = await likes[index].include({
+      const likeObj = new Like(likes[index])
+      likes[index] = await likeObj.include({
         ...include
       })
     }
