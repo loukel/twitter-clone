@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar.js"
+import Loader from "./components/Loader.js"
 import LoginModal from "./features/auth/LoginModal.js"
 import RegisterModal from "./features/auth/RegisterModal.js"
 import Feed from "./features/feed/Feed.js"
@@ -99,6 +100,7 @@ const main = async () => {
     ${Navbar()}
     ${RegisterModal()}
     ${LoginModal()}
+    ${Loader()}
     <section class='body-font'>
       ${page}
     </section>

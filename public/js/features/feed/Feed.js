@@ -14,7 +14,7 @@ const Feed = async () => {
   const user = auth.currentUser
 
   return `
-    <div class="container px-5 py-12 mx-auto">
+    <div class="container px-5 py-12 mx-auto animate-fade">
       ${user 
           ? NewPost(posts)
           : `

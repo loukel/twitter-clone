@@ -41,7 +41,7 @@ const PostView = async (id) => {
   }
 
   return `
-    <div class="container px-5 py-12 mx-auto">
+    <div class="container px-5 py-12 mx-auto animate-fade">
       ${post.parentId ? `<span class='mr-2'>replying to</span><span onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
       ${Post(post, {replyButton: false})}
       ${user 
