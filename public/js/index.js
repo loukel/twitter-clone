@@ -4,6 +4,7 @@ import LoginModal from "./features/auth/LoginModal.js"
 import RegisterModal from "./features/auth/RegisterModal.js"
 import Feed from "./features/feed/Feed.js"
 import PostView from "./features/post/PostView.js"
+import UserList from "./features/users/features/userList/UserList.js"
 import {
   createLike,
   destroyLike
@@ -11,6 +12,7 @@ import {
 
 const parameters = new URLSearchParams(window.location.search)
 const postId = parameters.get('postId')
+const search = parameters.get('search')
 
 const main = async () => {
   window.likePost = postId => {
@@ -90,10 +92,12 @@ const main = async () => {
   const rootEl = document.getElementById('root')
 
   let page = ''
-  if (!postId) {
-    page = await Feed()
-  } else {
+  if (postId) {
     page = await PostView(postId)
+  } else if (search) {
+    page = await UserList(search)
+  } else {
+    page = await Feed()
   }
 
   rootEl.innerHTML = `

@@ -24,6 +24,27 @@ const Navbar = () => {
       })
   }
 
+  window.searchUser = () => {
+    const e = self.event
+    e.preventDefault()
+    const userQuery = document.getElementById('userSearchInput').value
+    if (userQuery) {
+      fetch('/')
+        .then(() => {
+          const params = new URLSearchParams(window.location.search)
+
+          params.set('search', userQuery)
+          window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
+          window.rerender()
+        })
+        .catch(error => {
+          console.error(error)
+          console.error('Server has disconnected!')
+          alert('Server has disconnected!')
+        })
+    }
+  }
+
   return `
     <!-- Navbar modified from https://flowbite.com/docs/components/navbar/ -->
     <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
@@ -31,8 +52,17 @@ const Navbar = () => {
         <a onClick='goHome()' class="flex cursor-pointer">
           <!-- Icon from https://www.svgrepo.com/svg/280522/fire -->
           ${FireIcon()}
-          <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">social media</span>
+          <span class="ml-4 self-center text-lg font-semibold whitespace-nowrap dark:text-white">social media</span>
         </a>
+        <div class="flex justify-center">
+          <!-- search box modified from https://tailwind-elements.com/docs/standard/forms/search/ -->
+          <div class="xl:w-96">
+            <form class="input-group relative flex items-stretch w-full" onSubmit='searchUser()'>
+              <input id='userSearchInput' type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon3">
+              <button type='submit' class="btn inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="button" id="button-addon3">Search</button>
+            </form>
+          </div>
+        </div>
         <div class="flex items-center md:order-2">
           ${user 
               ? `

@@ -39,7 +39,7 @@ const Post = ({
       <!-- Modified from https://tailblocks.cc/ -->
       <div class='flex relative'>
         <div class="w-10 h-10 inline-flex items-center justify-center rounded-full border mb-4 mr-5">
-          <img class="rounded-full" src="https://eu.ui-avatars.com/api/?background=random&name=L+K" alt="user photo">
+          <img class="rounded-full" src="${user.photoURL}" alt="user photo">
         </div>
         <h2 class="mr-5 text-lg text-gray-900 font-medium title-font mb-2">${user.displayName} <small>${user.email}</small></h2>
         <h4 class="text-m text-gray-900 font-medium title-font mb-2">${formatDateTime(new Date(createdAt))}</h4>
