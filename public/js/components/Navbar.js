@@ -31,10 +31,7 @@ const Navbar = () => {
     if (userQuery) {
       fetch('/')
         .then(() => {
-          const params = new URLSearchParams(window.location.search)
-
-          params.set('search', userQuery)
-          window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
+          window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?search=${userQuery}`))
           window.rerender()
         })
         .catch(error => {

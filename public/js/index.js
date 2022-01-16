@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar.js"
-import Loader from "./components/Loader.js"
 import LoginModal from "./features/auth/LoginModal.js"
 import RegisterModal from "./features/auth/RegisterModal.js"
 import Feed from "./features/feed/Feed.js"
@@ -9,10 +8,12 @@ import {
   createLike,
   destroyLike
 } from "./services/likeApi.js"
+import Profile from "./features/users/features/userIndividual/Profile.js"
 
 const parameters = new URLSearchParams(window.location.search)
 const postId = parameters.get('postId')
 const search = parameters.get('search')
+const userId = parameters.get('userId')
 
 const main = async () => {
   window.likePost = postId => {
@@ -63,10 +64,7 @@ const main = async () => {
   window.goToPost = id => {
     fetch('/')
       .then(() => {
-        const params = new URLSearchParams(window.location.search)
-
-        params.set('postId', id)
-        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`))
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?postId=${id}`))
         window.rerender()
       })
       .catch(error => {
@@ -91,24 +89,30 @@ const main = async () => {
 
   const rootEl = document.getElementById('root')
 
+  rootEl.innerHTML = `
+    ${Navbar()}
+    ${RegisterModal()}
+    ${LoginModal()}
+    <section id='main' class='body-font'>
+      <!-- Loading copied from https://larainfo.com/blogs/tailwind-css-loading-spinner-example -->
+      <div class="flex items-center justify-center h-80">
+        <div class="w-40 h-40 border-t-4 border-b-4 border-black rounded-full animate-spin"></div>
+      </div>
+    </section>
+  `
+
   let page = ''
   if (postId) {
     page = await PostView(postId)
   } else if (search) {
     page = await UserList(search)
+  } else if (userId) {
+    page = await Profile(userId)
   } else {
     page = await Feed()
   }
 
-  rootEl.innerHTML = `
-    ${Navbar()}
-    ${RegisterModal()}
-    ${LoginModal()}
-    ${Loader()}
-    <section class='body-font'>
-      ${page}
-    </section>
-  `
+  document.getElementById('main').innerHTML = page
 }
 
 main()

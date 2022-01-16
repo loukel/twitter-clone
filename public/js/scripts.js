@@ -1,8 +1,6 @@
 // Modified from https://stackoverflow.com/a/9642359
 const rerender = () => {
   // Remove existing script
-
-  document.getElementById('loader').classList.remove('hidden')
   let head = document.getElementsByTagName('head')[0]
   let script = document.getElementById('mainScript')
   head.removeChild(script)
