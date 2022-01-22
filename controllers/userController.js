@@ -3,9 +3,13 @@ import Like from "../models/Like.js"
 import Post from "../models/Post.js"
 
 const get_users = (req, res) => {
+  const query = req.query.query
+
   admin.auth().listUsers()
+    .then(data => data.users)
     .then(users => {
-      res.status(200).send(users)
+      let search = new RegExp(query, 'iu')
+      res.status(200).send(users.filter(user => search.test(user.displayName) || search.test(user.email)))
     })
     .catch(error => {
       console.log(error)
