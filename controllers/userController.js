@@ -1,6 +1,6 @@
-import admin from "../lib/firebaseAdmin.js";
-import Like from "../models/Like.js";
-import Post from "../models/Post.js";
+import admin from "../lib/firebaseAdmin.js"
+import Like from "../models/Like.js"
+import Post from "../models/Post.js"
 
 const get_users = (req, res) => {
   admin.auth().listUsers()
