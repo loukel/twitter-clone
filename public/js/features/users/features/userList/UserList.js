@@ -1,12 +1,10 @@
+import {
+  getUsers
+} from '../../../../services/userApi.js'
 import UserCard from './UserCard.js'
 
-const UserList = () => {
-  let user = {
-    id: '1',
-    displayName: 'Louis Kelly',
-    photoURL: 'https://eu.ui-avatars.com/api/?background=random&name=Louis+Korkery',
-    email: 'louis.kelly1@hotmail.com',
-  }
+const UserList = async search => {
+  let users = await getUsers(search)
 
   window.goToUser = id => {
     fetch('/')
@@ -24,11 +22,7 @@ const UserList = () => {
   return `
   <div class='flex justify-center mt-6'>
     <div class="grid grid-cols-3 gap-6">
-      ${UserCard(user)}
-      ${UserCard(user)}
-      ${UserCard(user)}
-      ${UserCard(user)}
-      ${UserCard(user)}
+      ${users.users.map(user => UserCard(user)).join('')}
     </div>
   </div>
   `

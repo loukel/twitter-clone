@@ -9,13 +9,18 @@ import {
   destroyLike
 } from "./services/likeApi.js"
 import Profile from "./features/users/features/userIndividual/Profile.js"
+import {
+  getAuth,
+  onAuthStateChanged,
+}
+from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
 const parameters = new URLSearchParams(window.location.search)
 const postId = parameters.get('postId')
 const search = parameters.get('search')
 const userId = parameters.get('userId')
 
-const main = async () => {
+const main = () => {
   window.likePost = postId => {
     createLike({
         postId,
@@ -89,30 +94,33 @@ const main = async () => {
 
   const rootEl = document.getElementById('root')
 
-  rootEl.innerHTML = `
-    ${Navbar()}
-    ${RegisterModal()}
-    ${LoginModal()}
-    <section id='main' class='body-font'>
-      <!-- Loading copied from https://larainfo.com/blogs/tailwind-css-loading-spinner-example -->
-      <div class="flex items-center justify-center h-80">
-        <div class="w-40 h-40 border-t-4 border-b-4 border-black rounded-full animate-spin"></div>
-      </div>
-    </section>
-  `
+  const auth = getAuth()
+  onAuthStateChanged(auth, async user => {
+    rootEl.innerHTML = `
+      ${Navbar(user)}
+      ${RegisterModal()}
+      ${LoginModal()}
+      <section id='main' class='body-font'>
+        <!-- Loading copied from https://larainfo.com/blogs/tailwind-css-loading-spinner-example -->
+        <div class="flex items-center justify-center h-80">
+          <div class="w-40 h-40 border-t-4 border-b-4 border-black rounded-full animate-spin"></div>
+        </div>
+      </section>
+    `
 
-  let page = ''
-  if (postId) {
-    page = await PostView(postId)
-  } else if (search) {
-    page = await UserList(search)
-  } else if (userId) {
-    page = await Profile(userId)
-  } else {
-    page = await Feed()
-  }
+    let page = ''
+    if (postId) {
+      page = await PostView(postId)
+    } else if (search) {
+      page = await UserList(search)
+    } else if (userId) {
+      page = await Profile(userId)
+    } else {
+      page = await Feed()
+    }
 
-  document.getElementById('main').innerHTML = page
+    document.getElementById('main').innerHTML = page
+  })
 }
 
 main()

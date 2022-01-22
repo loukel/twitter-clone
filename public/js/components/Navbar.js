@@ -7,9 +7,8 @@ import "../firebase.js"
 import FireIcon from "../resources/fireIcon.js"
 
 // Navbar modified from https://flowbite.com/docs/components/navbar/ 
-const Navbar = () => {
+const Navbar = (user) => {
   const auth = getAuth()
-  const user = auth.currentUser
 
   window.toggleUserDropDown = () => {
     document.getElementById('dropdown').classList.toggle('hidden')
