@@ -8,10 +8,13 @@ const Profile = async (userId) => {
 
   return `
   <div class="container px-5 py-12 mx-auto animate-fade">
-    <h1 class='text-4xl font-medium mb-4'>
+    <div class='text-4xl font-medium'>
       ${user.displayName}'s Posts
-    </h1>
-    <div id='posts'>
+    </div>
+    <div class='text-3xl font-medium'>
+      Posts → ${user.posts.length} 
+    </div>
+    <div id='posts' class='mt-4'>
       ${Posts(user.posts)}
     </div>
   </div>

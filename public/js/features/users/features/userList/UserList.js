@@ -20,9 +20,9 @@ const UserList = async search => {
   }
 
   return `
-  <div class='flex justify-center mt-6'>
+  <div class='flex justify-center mt-6 text-xl font-medium'>${users.length == 0 ? `your search - '${search}' - did not match any users. :(` : `users found → ${users.length}`}</div>
+  <div class='flex justify-center mt-3'>
     <div class="grid grid-cols-3 gap-6">
-      ${users.length == 0 ? `your search - '${search}' - did not match any users. :(` : ''}
       ${users.map(user => UserCard(user)).join('')}
     </div>
   </div>

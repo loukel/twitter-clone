@@ -1,7 +1,7 @@
 // Modified from https://tailwindcomponents.com/component/tailwind-css-users-card-list
 
 const UserCard = (user) => `
-  <div onClick="goToUser('${user.id}')" class="py-3 sm:py-4 bg-white grow">
+  <div onClick="goToUser('${user.uid}')" class="py-3 sm:py-4 bg-white grow cursor-pointer">
     <div class="flex items-center space-x-4 px-6">
         <div class="flex-shrink-0">
             <img class="w-12 h-12 rounded-full" src="${user.photoURL}" alt="Profile">

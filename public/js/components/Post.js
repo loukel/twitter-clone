@@ -12,10 +12,6 @@ const Post = ({
   body,
   user,
   likes,
-}, {
-  replyButton
-} = {
-  replyButton: true
 }) => {
   const auth = getAuth()
   const currentUser = auth.currentUser
@@ -33,8 +29,8 @@ const Post = ({
 
   return `
     <div 
-      class="border border-gray-200 bg-white p-6 rounded-lg mb-3 cursor-pointer"
-      ${currentUser ? '' : `onClick="goToPost('${id}')"`}
+      class="z-0 border border-gray-200 bg-white p-6 rounded-lg mb-3 cursor-pointer"
+      onClick="goToPost('${id}')"
     >
       <!-- Modified from https://tailblocks.cc/ -->
       <div class='flex relative'>
@@ -49,23 +45,17 @@ const Post = ({
       <p class="leading-relaxed text-base">${body}</p>
       ${currentUser 
         ? `
-          <div class='grid grid-cols-${replyButton ? 2 : 1}'>
+          <div class='grid grid-cols-1'>
             <button 
               onClick="${liked ? `removeLike('${like.id}')` : `likePost('${id}')`}" 
               id='likeBtn-${id}' 
-              class='py-2 px-4 border ${liked 
+              class='z-10 py-2 px-4 border ${liked 
                 ? 'font-bold bg-blue-700 text-white'
                 : 'font-semibold'
               }'
             >
               like${liked ? 'd' : ''}
             </button>
-            ${replyButton 
-              ? `
-                <button class='font-semibold py-2 px-4 border' onClick="goToPost('${id}')">reply</button>
-              `
-              : ''
-            } 
           </div>
         `
         : ''

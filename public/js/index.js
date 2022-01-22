@@ -22,6 +22,8 @@ const userId = parameters.get('userId')
 
 const main = () => {
   window.likePost = postId => {
+    const e = self.event
+    e.stopPropagation()
     createLike({
         postId,
       })
@@ -45,6 +47,8 @@ const main = () => {
   }
 
   window.removeLike = (likeId) => {
+    const e = self.event
+    e.stopPropagation()
     destroyLike(likeId)
       .then(like => {
         // Update like button on post to display that it has been liked
@@ -67,6 +71,11 @@ const main = () => {
 
   // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
   window.goToPost = id => {
+    const e = self.event
+    e.stopPropagation()
+    if (postId && postId == id) {
+      return
+    }
     fetch('/')
       .then(() => {
         window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?postId=${id}`))
@@ -100,7 +109,7 @@ const main = () => {
       ${Navbar(user)}
       ${RegisterModal()}
       ${LoginModal()}
-      <section id='main' class='body-font'>
+      <section id='main' class='body-font mx-auto'>
         <!-- Loading copied from https://larainfo.com/blogs/tailwind-css-loading-spinner-example -->
         <div class="flex items-center justify-center h-80">
           <div class="w-40 h-40 border-t-4 border-b-4 border-black rounded-full animate-spin"></div>
