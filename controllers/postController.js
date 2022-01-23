@@ -5,6 +5,10 @@ const get_posts = async (req, res) => {
     include: {
       user: true,
       likes: true,
+    },
+    paginate: {
+      limit: 10,
+      page: 1,
     }
   })
   res.status(200).send(posts)

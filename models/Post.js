@@ -2,6 +2,9 @@ import admin from '../lib/firebaseAdmin.js'
 import Model from './Model.js'
 import Like from './Like.js'
 
+// Modified from https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property
+const orderByDate = (array) => array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
 class Post extends Model {
   constructor({
     id,
@@ -90,12 +93,19 @@ class Post extends Model {
     parentId,
     body,
     userId,
+    createdAt,
+  } = {
+    parentId: null,
+    body: '',
+    userId: -1,
+    createdAt: false,
   }) {
     let storeObj = Post.getStore()
     let newPost = new Post({
       parentId,
       body,
       userId,
+      createdAt,
     })
     storeObj.push(newPost)
     Post.replaceStore(storeObj)
@@ -106,6 +116,7 @@ class Post extends Model {
     parentId,
     userId,
     include,
+    paginate,
   } = {
     parentId: false,
     userId: false,
@@ -115,8 +126,12 @@ class Post extends Model {
       user: false,
       likes: false,
     },
+    paginate: {
+      limit: 10,
+      page: -1,
+    }
   }) {
-    let posts = this.getStore()
+    let posts = orderByDate(this.getStore())
     if (parentId) {
       posts = posts.filter(item => item.parentId === parentId)
     }
@@ -124,6 +139,10 @@ class Post extends Model {
       posts = posts.filter(item => item.userId === userId)
     }
     posts = posts.map(post => new Post(post))
+    if (paginate) {
+      let last = paginate.page * paginate.limit
+      posts = posts.slice(last - paginate.limit, last + 1)
+    }
     for (let index = 0; index < posts.length; index += 1) {
       posts[index] = await posts[index].include({
         ...include

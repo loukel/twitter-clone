@@ -10,7 +10,7 @@ class Model {
   }) {
     this.id = id || cuid()
     this.createdAt = createdAt || new Date()
-    this.updatedAt = updatedAt || new Date()
+    this.updatedAt = updatedAt || this.createdAt
   }
 
   json() {
