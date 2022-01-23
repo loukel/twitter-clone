@@ -27,12 +27,13 @@ const get_post = async (req, res) => {
   const id = req.params.id
   const post = Post.find(id)
   if (post) {
-    res.status(200).send(await post.include({
+    let postObj = await post.include({
       parent: true,
       children: true,
       user: true,
       likes: true,
-    }))
+    })
+    res.status(200).send(postObj)
   } else {
     res.sendStatus(404)
   }

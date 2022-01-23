@@ -69,7 +69,11 @@ class Post extends Model {
 
   async children() {
     const posts = await Post.findMany({
-      parentId: this.id
+      parentId: this.id,
+      include: {
+        user: true,
+        likes: true,
+      },
     })
     return posts
   }

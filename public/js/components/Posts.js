@@ -7,8 +7,7 @@ const Posts = (posts) => posts
     createdAt: post.createdAt,
     user: post.user,
     likes: post.likes,
-  }))
-  .join('')
+  })).join('')
 
 
 export default Posts
