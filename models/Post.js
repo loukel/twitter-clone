@@ -145,7 +145,9 @@ class Post extends Model {
     posts = posts.map(post => new Post(post))
     if (paginate) {
       let last = paginate.page * paginate.limit
-      posts = posts.slice(last - paginate.limit, last + 1)
+      let start = last - paginate.limit
+      console.log(start, last)
+      posts = posts.slice(start, last)
     }
     for (let index = 0; index < posts.length; index += 1) {
       posts[index] = await posts[index].include({

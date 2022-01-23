@@ -12,6 +12,28 @@ const Feed = async () => {
   let posts = await getPosts()
   const auth = getAuth()
   const user = auth.currentUser
+  window.page = 1
+  window.loadingPosts = false
+  window.lastPage = false
+
+  // When the user scrolls to the bottom of the feed more posts load
+  window.onscroll = async () => {
+    if (!window.lastPage && !window.loadingPosts && window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      window.loadingPosts = true
+      const postsEl = document.getElementById('posts')
+      postsEl.innerHTML += `<div class='flex justify-center' id='loadingPosts'>Loading more posts...</div>`
+      const morePosts = await getPosts(window.page + 1)
+      const loadingPostsEl = document.getElementById('loadingPosts')
+      postsEl.removeChild(loadingPostsEl)
+      postsEl.innerHTML += Posts(morePosts)
+
+      window.page += 1
+      window.loadingPosts = false
+      if (morePosts.length < 10) {
+        window.lastPage = true
+      }
+    }
+  }
 
   return `
     <div class="container px-5 py-12 mx-auto animate-fade">

@@ -3,8 +3,8 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
-const getPosts = async () => {
-  const posts = await fetch('/api/posts', {
+const getPosts = async (page) => {
+  const posts = await fetch(`/api/posts?page=${page || 1}`, {
     method: 'GET',
   }).then(res => res.json())
 

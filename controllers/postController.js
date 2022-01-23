@@ -1,6 +1,7 @@
 import Post from '../models/Post.js'
 
 const get_posts = async (req, res) => {
+  const page = req.query.page
   const posts = await Post.findMany({
     include: {
       user: true,
@@ -8,7 +9,7 @@ const get_posts = async (req, res) => {
     },
     paginate: {
       limit: 10,
-      page: 1,
+      page: page || 1,
     }
   })
   res.status(200).send(posts)
