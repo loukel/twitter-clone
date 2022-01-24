@@ -6,19 +6,6 @@ import UserCard from './UserCard.js'
 const UserList = async search => {
   let users = await getUsers(search)
 
-  window.goToUser = id => {
-    fetch('/')
-      .then(() => {
-        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?userId=${id}`))
-        window.rerender()
-      })
-      .catch(error => {
-        console.error(error)
-        console.error('Server has disconnected!')
-        alert('Server has disconnected!')
-      })
-  }
-
   return `
   <div class='flex justify-center mt-6 text-xl font-medium'>${users.length == 0 ? `your search - '${search}' - did not match any users. :(` : `users found → ${users.length}`}</div>
   <div class='flex justify-center mt-3'>

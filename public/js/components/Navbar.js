@@ -4,7 +4,6 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 import "../firebase.js"
-import FireIcon from "../resources/fireIcon.js"
 
 // Navbar modified from https://flowbite.com/docs/components/navbar/ 
 const Navbar = (user) => {
@@ -46,8 +45,6 @@ const Navbar = (user) => {
     <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
       <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a onClick='goHome()' class="flex cursor-pointer">
-          <!-- Icon from https://www.svgrepo.com/svg/280522/fire -->
-          ${FireIcon()}
           <span class="ml-4 self-center text-lg font-semibold whitespace-nowrap dark:text-white">social media</span>
         </a>
         <div class="flex justify-center">
@@ -73,10 +70,10 @@ const Navbar = (user) => {
                     </div>
                     <ul class="py-1" aria-labelledby="dropdown">
                       <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">profile</a>
+                        <a onClick="goToUser('${user.uid}')" class="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">profile</a>
                       </li>
                       <li>
-                        <a onClick='signOut()' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">sign out</a>
+                        <a onClick='signOut()' class="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">sign out</a>
                       </li>
                     </ul>
                   </div>

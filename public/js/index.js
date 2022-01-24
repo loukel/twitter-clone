@@ -21,6 +21,19 @@ const search = parameters.get('search')
 const userId = parameters.get('userId')
 
 const main = () => {
+  window.goToUser = id => {
+    fetch('/')
+      .then(() => {
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?userId=${id}`))
+        window.rerender()
+      })
+      .catch(error => {
+        console.error(error)
+        console.error('Server has disconnected!')
+        alert('Server has disconnected!')
+      })
+  }
+
   window.likePost = postId => {
     const e = self.event
     e.stopPropagation()

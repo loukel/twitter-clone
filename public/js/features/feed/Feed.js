@@ -15,10 +15,11 @@ const Feed = async () => {
   window.page = 1
   window.loadingPosts = false
   window.lastPage = false
+  const parameters = new URLSearchParams(window.location.search)
 
   // When the user scrolls to the bottom of the feed more posts load
   window.onscroll = async () => {
-    if (!window.lastPage && !window.loadingPosts && window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+    if (parameters.get('userId') === null && !window.lastPage && !window.loadingPosts && window.innerHeight + window.scrollY >= document.body.scrollHeight) {
       window.loadingPosts = true
       const postsEl = document.getElementById('posts')
       postsEl.innerHTML += `<div class='flex justify-center' id='loadingPosts'>Loading more posts...</div>`
