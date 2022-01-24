@@ -34,10 +34,10 @@ const Post = ({
     >
       <!-- Modified from https://tailblocks.cc/ -->
       <div class='flex relative'>
-        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full border mb-4 mr-5">
+        <div onClick="goToUser('${user.uid}')" class="w-10 h-10 inline-flex items-center justify-center rounded-full border mb-4 mr-5">
           <img class="rounded-full" src="${user.photoURL}" alt="user photo">
         </div>
-        <h2 class="mr-5 text-lg text-gray-900 font-medium title-font mb-2">${user.displayName} <small>${user.email}</small></h2>
+        <h2 onClick="goToUser('${user.uid}')" class="hover:underline mr-5 text-lg text-gray-900 font-medium title-font mb-2">${user.displayName} <small>${user.email}</small></h2>
         <h4 class="text-m text-gray-900 font-medium title-font mb-2">${formatDateTime(new Date(createdAt))}</h4>
         <h4 class="text-semibold absolute top-0 right-0" id='likeCounter-${id}' data-count='${likeCount}'>${likeCount} like${likeCount !== 1 ? 's' : ''}</h4>
       </div>
