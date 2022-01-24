@@ -22,15 +22,15 @@ const PostView = async (id) => {
   const addChild = (reply) => {
     const repliesEl = document.getElementById('replies')
     post.children = [...post.children, reply]
-    console.log(reply)
     repliesEl.innerHTML = Posts(post.children)
   }
 
   window.submitReply = async () => {
+    const e = self.event
+    e.preventDefault()
     const replyInputEl = document.getElementById('replyInput')
     let reply = replyInputEl.value
     if (reply.length != 0 && reply !== ' ') {
-      reply = reply.replace('.', " ").replace("  ", " ")
       const newReply = await createPost({
         body: reply,
         parentId: id
@@ -46,12 +46,12 @@ const PostView = async (id) => {
       ${Post(post)}
       ${user 
         ? `
-          <div class="mb-3 pt-0 flex">
-            ${PostInput({elementId: 'replyInput', placeHolder: 'what do you think about this', onSubmit: 'submitReply'})}
-            <button onClick='submitReply()' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+          <form class="mb-3 pt-0 flex" onSubmit='submitReply()'>
+            ${PostInput({elementId: 'replyInput', placeHolder: 'what do you think about this'})}
+            <button type='submit' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
               reply
             </button>
-          </div>
+          </form>
         `
         : `
           <span>

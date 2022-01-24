@@ -38,7 +38,7 @@ const Feed = async () => {
   return `
     <div class="container px-5 py-12 mx-auto animate-fade">
       ${user 
-          ? NewPost(posts)
+          ? NewPost()
           : `
             <span>
               <span onClick='showLoginModal()' class='cursor-pointer hover:underline text-blue-700'>login</span> or <span onClick='showRegisterModal()' class='cursor-pointer hover:underline text-blue-700'>register</span> to post

@@ -15,13 +15,10 @@ const get_posts = async (req, res) => {
   res.status(200).send(posts)
 }
 
-const create_post = async (req, res) => {
+const create_post = (req, res) => {
   const data = req.body
   let post = Post.create(data)
-  res.status(201).send(await post.include({
-    user: true,
-    likes: true,
-  }))
+  res.status(201).send(post)
 }
 
 const get_post = async (req, res) => {

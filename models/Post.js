@@ -80,10 +80,10 @@ class Post extends Model {
 
   async user() {
     const userId = this.userId
-    const userRecord = await admin
+    let userObj = await admin
       .auth()
       .getUser(`${userId}`)
-    return userRecord
+    return userObj
   }
 
   async likes() {
@@ -146,7 +146,6 @@ class Post extends Model {
     if (paginate) {
       let last = paginate.page * paginate.limit
       let start = last - paginate.limit
-      console.log(start, last)
       posts = posts.slice(start, last)
     }
     for (let index = 0; index < posts.length; index += 1) {

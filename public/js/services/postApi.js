@@ -16,14 +16,16 @@ const createPost = async (body) => {
   const user = auth.currentUser
   body.userId = user.uid
 
-  const post = await fetch('/api/posts', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body),
-  }).then(res => res.json())
+  const post = await fetch('/api/posts/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    })
+    .then(res => res.json())
+    .catch(error => console.log(error))
 
   return post
 }
