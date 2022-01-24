@@ -37,7 +37,7 @@ const PostView = async (id) => {
       newReply.likes = []
       newReply.user = user
       addChild(newReply)
-      replyInputEl.value = ''
+      reply = ''
     }
   }
 
