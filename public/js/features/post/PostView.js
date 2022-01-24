@@ -35,6 +35,8 @@ const PostView = async (id) => {
         body: reply,
         parentId: id
       })
+      newReply.likes = []
+      newReply.user = user
       addChild(newReply)
       replyInputEl.value = ''
     }
@@ -47,7 +49,7 @@ const PostView = async (id) => {
       ${user 
         ? `
           <form class="mb-3 pt-0 flex" onSubmit='submitReply()'>
-            ${PostInput({elementId: 'replyInput', placeHolder: 'what do you think about this'})}
+            ${PostInput({elementId: 'replyInput', placeHolder: 'What do you think about this?'})}
             <button type='submit' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
               reply
             </button>
