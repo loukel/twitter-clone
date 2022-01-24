@@ -14,6 +14,7 @@ import {
   onAuthStateChanged,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
+import Search from "./components/Search.js"
 
 const parameters = new URLSearchParams(window.location.search)
 const postId = parameters.get('postId')
@@ -125,6 +126,7 @@ const main = () => {
       ${Navbar(user)}
       ${RegisterModal()}
       ${LoginModal()}
+      ${Search()}
       <section id='main' class='body-font mx-auto'>
         <!-- Loading copied from https://larainfo.com/blogs/tailwind-css-loading-spinner-example -->
         <div class="flex items-center justify-center h-80">
