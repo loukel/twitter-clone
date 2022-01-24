@@ -28,8 +28,7 @@ const PostView = async (id) => {
   window.submitReply = async () => {
     const e = self.event
     e.preventDefault()
-    const replyInputEl = document.getElementById('replyInput')
-    let reply = replyInputEl.value
+    let reply = e.target.elements[0].value
     if (reply.length != 0 && reply !== ' ') {
       const newReply = await createPost({
         body: reply,
@@ -43,8 +42,8 @@ const PostView = async (id) => {
   }
 
   return `
-    <div class="container px-5 py-12 mx-auto animate-fade">
-      ${post.parentId ? `<span class='mr-2'>replying to</span><span onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
+    <div class="container px-5 px-12 mx-auto animate-fade">
+      ${post.parentId ? `<span class='mr-2'>Replying to →</span><span class='cursor-pointer text-blue-500' onClick="goToPost('${post.parentId}')">${post.parent.body}</span>` : ''}
       ${Post(post)}
       ${user 
         ? `

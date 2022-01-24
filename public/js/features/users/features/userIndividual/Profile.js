@@ -9,7 +9,7 @@ const Profile = async (userId) => {
   window.onscroll = () => false
 
   return `
-  <div class="container px-5 py-12 mx-auto animate-fade">
+  <div class="container px-5 pb-12 mx-auto animate-fade">
     <div class='text-4xl font-medium'>
       ${user.displayName}'s Posts
     </div>
