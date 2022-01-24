@@ -140,7 +140,7 @@ class Post extends Model {
       posts = posts.filter(item => item.parentId === parentId)
     }
     if (userId) {
-      posts = posts.filter(item => item.userId === userId)
+      posts = posts.filter(post => post.userId == userId)
     }
     posts = posts.map(post => new Post(post))
     if (paginate) {

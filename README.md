@@ -12,11 +12,23 @@ This web app is a social media inspired by Twitter, posts are not allowed to inc
 -`npm start`
 -Navigate to [http://localhost:3000/](http://localhost:3000/)
 
+## Firebase
+
+For authentication, the web app uses Firebase. My creditials are public in the app, therefore I have trust you will not maliciously use them. 
+
+### Firebase Accounts
+
+I have generated 15 accounts using the email in the format i@test.com (i = 1-15) which all have the password `password`.
+<br>
+<>Example (Recommended)<br>
+Email: `1@test.com`<br>
+Password: `password`
+
 ## Design Inspirations
 
--Front-end renderer inspired by [React](https://reactjs.org/).
+- Front-end renderer inspired by [React](https://reactjs.org/).
 
--Back-end Models inspired by Laravel, MVC architecture and Prisma, JSON database inspired by MongoDB
+- Back-end Models inspired by Laravel, MVC architecture and Prisma, JSON database inspired by MongoDB
 
 ## Styling
 

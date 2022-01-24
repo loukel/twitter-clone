@@ -46,17 +46,6 @@ const get_user = async (req, res) => {
       likes,
     }
 
-    /*
-     * Add user's liked posts
-     * user.likes = await Like.findMany({
-     *   userId: user.uid,
-     *   include: {
-     *     post: true,
-     *     user: true,
-     *   }
-     * })
-     */
-
     res.status(200).send(user)
   } catch (error) {
     console.log(error)

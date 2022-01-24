@@ -34,9 +34,9 @@ const createUsers = async (userIds) => {
 
 const createPosts = userIds => {
   let posts = []
-  for (let uid = 1; uid <= 15; uid += 1) {
+  for (let uid = 1; uid <= 5; uid += 1) {
     // 2 <= postAmount <= 10
-    let postAmount = 2 + Math.floor(Math.random() * 8)
+    let postAmount = 2 + Math.floor(Math.random() * 4)
     for (let i = 0; i < postAmount; i += 1) {
       let parentId = null
       let body = faker.random.words(Math.floor(10 * Math.random())).toLowerCase()
@@ -75,7 +75,7 @@ const main = async () => {
   Post.replaceStore([])
 
   // Generate an array of 1-100 for the user ids
-  let userIds = Array.from(Array(16).keys()).map(String)
+  let userIds = Array.from(Array(6).keys()).map(String)
   userIds.shift()
 
   await createUsers(userIds)
