@@ -4,13 +4,20 @@
 
 This web app is a social media inspired by Twitter, posts are not allowed to include punctuation or capital letters - this is to attempt to increase informallity in speech (this is mainly to differentiate from Twitter).
 
+## Documentation
+
+[View the documentation for the API here](https://documenter.getpostman.com/view/16362168/UVe9SVQ5)
+
 ## Installation and setup
 
 -`npm i`
--`npm run build:css`
--`npm run seed`
 -`npm start`
 -Navigate to [http://localhost:3000/](http://localhost:3000/)
+
+## Other commands
+
+-`npm run build:css`
+-`npm run seed`
 
 ## Firebase
 
@@ -18,9 +25,9 @@ For authentication, the web app uses Firebase. My creditials are public in the a
 
 ### Firebase Accounts
 
-I have generated 15 accounts using the email in the format i@test.com (i = 1-15) which all have the password `password`.
+I have generated 5 accounts using the email in the format i@test.com (i = 1-5) which all have the password `password`.
 <br>
-<>Example (Recommended)<br>
+Example (Recommended)<br>
 Email: `1@test.com`<br>
 Password: `password`
 
