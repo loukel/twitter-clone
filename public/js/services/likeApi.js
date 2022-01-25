@@ -3,22 +3,6 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
-const getLikes = async ({
-  userId,
-} = {
-  userId: null,
-}) => {
-  const likes = await fetch(`/api/likes?userId=${userId}`, {
-      method: 'GET',
-    }).then(res => res.json())
-    .catch((error) => {
-      console.error(error)
-      return []
-    })
-
-  return likes
-}
-
 const createLike = async (body) => {
   const auth = getAuth()
   const user = auth.currentUser
@@ -50,7 +34,6 @@ const destroyLike = id => fetch(`/api/likes/${id}`, {
   })
 
 export {
-  getLikes,
   createLike,
   destroyLike,
 }

@@ -1,18 +1,5 @@
 import Like from '../models/Like.js'
 
-const get_likes = async (req, res) => {
-  res.status(200).send(await Like.findMany({
-    include: {
-      user: true,
-      post: {
-        include: {
-          user: true,
-        },
-      },
-    }
-  }))
-}
-
 const create_like = (req, res) => {
   const data = req.body
   let like = Like.create(data)
@@ -31,7 +18,6 @@ const destroy_like = (req, res) => {
 }
 
 export default {
-  get_likes,
   create_like,
   destroy_like,
 }
