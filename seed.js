@@ -57,7 +57,7 @@ const createPosts = userIds => {
 
       // Create likes for the post
       let likeUserPool = userIds.sort(() => 0.5 - Math.random())
-      let likeAmount = 1 + Math.floor(15 * Math.random())
+      let likeAmount = 1 + Math.floor(4 * Math.random())
       for (let i = 0; i <= likeAmount; i += 1) {
         Like.create({
           postId: post.id,

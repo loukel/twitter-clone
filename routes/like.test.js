@@ -2,6 +2,17 @@ import app from '../server'
 import request from 'supertest'
 
 describe('Test like endpoints', () => {
+  test('GET /api/likes succeeds', async () => {
+    const res = await request(app).get("/api/likes?userId='1'")
+    return expect(res.status).toBe(200)
+  })
+
+  test('GET /api/likes returns JSON', async () => {
+    const res = await request(app).get("/api/likes?userId='1'")
+      .expect('Content-type', /json/u)
+    return res
+  })
+
   let like1Id = -1
   let like2Id = -1
   test('POST /api/likes succeeds', async () => {

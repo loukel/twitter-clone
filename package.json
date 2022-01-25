@@ -12,7 +12,8 @@
     "start": "node index.js"
   },
   "jest": {
-    "transform": {}
+    "transform": {},
+    "testTimeout": 20000
   },
   "repository": {
     "type": "git",
