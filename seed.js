@@ -39,7 +39,7 @@ const createPosts = userIds => {
     let postAmount = 2 + Math.floor(Math.random() * 4)
     for (let i = 0; i < postAmount; i += 1) {
       let parentId = null
-      let body = faker.random.words(Math.floor(10 * Math.random())).toLowerCase()
+      let body = faker.random.words(1 + Math.floor(10 * Math.random())).toLowerCase()
       let createdAt = new Date(faker.date.past())
       if (posts.length) {
         if (Math.random() > 0.5) {
