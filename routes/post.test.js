@@ -52,6 +52,7 @@ describe('Test post endpoints', () => {
     const res = await request(app).delete(`/api/posts/${post1Id}`)
     return expect(res.status).toBe(200)
   })
+
   test('DELETE /api/posts/:id returns JSON', async () => {
     const res = await request(app).delete(`/api/posts/${post2Id}`)
     return expect(res.type).toMatch(/json/u)

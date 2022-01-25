@@ -30,6 +30,7 @@ describe('Test like endpoints', () => {
     const res = await request(app).delete(`/api/likes/${like1Id}`)
     return expect(res.status).toBe(200)
   })
+
   test('DELETE /api/likes/:id returns JSON', async () => {
     const res = await request(app).delete(`/api/likes/${like2Id}`)
     return expect(res.type).toMatch(/json/u)
