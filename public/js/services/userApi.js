@@ -3,7 +3,7 @@ const getUser = async id => {
     .then(res => res.json())
     .catch(error => {
       console.error(error)
-      return false
+      return {}
     })
 
   return user
@@ -14,7 +14,7 @@ const getUsers = async query => {
     .then(res => res.json())
     .catch(error => {
       console.error(error)
-      return false
+      return []
     })
 
   return users

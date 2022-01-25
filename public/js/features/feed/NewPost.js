@@ -7,6 +7,7 @@ import {
   getAuth,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
+import handshake from "../../utils/handshake.js"
 
 const NewPost = () => {
   const auth = getAuth()
@@ -16,21 +17,23 @@ const NewPost = () => {
     postsEl.innerHTML = Posts([post]) + postsEl.innerHTML
   }
 
-  window.submitPost = async () => {
+  window.submitPost = () => {
     const e = self.event
     e.preventDefault()
-    const postInputEl = document.getElementById('postInput')
-    let post = postInputEl.value
-    if (post.length != 0 && post !== ' ') {
-      post = post.replace('.', " ").replace("  ", " ")
-      const newPost = await createPost({
-        body: post
-      })
-      newPost.user = auth.currentUser
-      newPost.likes = []
-      addPost(newPost)
-      postInputEl.value = ''
-    }
+    handshake(async () => {
+      const postInputEl = document.getElementById('postInput')
+      let post = postInputEl.value
+      if (post.length != 0 && post !== ' ') {
+        post = post.replace('.', " ").replace("  ", " ")
+        const newPost = await createPost({
+          body: post
+        })
+        newPost.user = auth.currentUser
+        newPost.likes = []
+        addPost(newPost)
+        postInputEl.value = ''
+      }
+    })
   }
 
   return `

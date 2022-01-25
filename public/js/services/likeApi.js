@@ -13,7 +13,7 @@ const getLikes = async ({
     }).then(res => res.json())
     .catch((error) => {
       console.error(error)
-      return false
+      return []
     })
 
   return likes
@@ -34,7 +34,7 @@ const createLike = async (body) => {
     }).then(res => res.json())
     .catch((error) => {
       console.error(error)
-      return false
+      return {}
     })
 
   return like
@@ -46,7 +46,7 @@ const destroyLike = id => fetch(`/api/likes/${id}`, {
   .then(res => res.json())
   .catch(error => {
     console.error(error)
-    return false
+    return {}
   })
 
 export {

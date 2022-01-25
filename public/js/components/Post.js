@@ -29,7 +29,7 @@ const Post = ({
 
   return `
     <div 
-      class="z-0 border border-gray-200 bg-white p-2 md:p-6 rounded-lg mb-3 cursor-pointer"
+      class="relative z-0 border border-gray-200 bg-white p-4 md:p-6 rounded-lg mb-3 cursor-pointer"
       onClick="goToPost('${id}')"
     >
       <!-- Modified from https://tailblocks.cc/ -->
@@ -40,26 +40,24 @@ const Post = ({
         <h2 onClick="goToUser('${user.uid}')" class="hover:underline mr-5 text-lg text-gray-900 font-medium title-font mb-2">${user.displayName} <small>${user.email}</small></h2>
         <h4 class="hidden md:block text-s text-gray-900 font-medium title-font mb-2">${formatDateTime(new Date(createdAt))}</h4>
         <h4 class="text-semibold absolute top-0 right-0" id='likeCounter-${id}' data-count='${likeCount}'>${likeCount} like${likeCount !== 1 ? 's' : ''}</h4>
-      </div>
-
-      <p class="leading-relaxed text-base">${body}</p>
-      ${currentUser 
-        ? `
-          <div class='grid grid-cols-1'>
+        ${currentUser 
+          ? `
             <button 
               onClick="${liked ? `removeLike('${like.id}')` : `likePost('${id}')`}" 
               id='likeBtn-${id}' 
-              class='z-10 py-2 px-4 border ${liked 
+              class='absolute top-10 right-0 z-10 py-2 px-4 border ${liked 
                 ? 'font-bold bg-blue-700 text-white'
-                : 'hover:bg-gray-100 font-semibold'
+                : 'font-semibold'
               }'
             >
               like${liked ? 'd' : ''}
             </button>
-          </div>
-        `
-        : ''
-      }
+          `
+          : ''
+        }
+      </div>
+
+      <p class="leading-relaxed text-base break-words pr-20">${body}</p>
     </div>
   `
 }

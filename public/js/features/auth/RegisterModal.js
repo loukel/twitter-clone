@@ -4,6 +4,7 @@ import {
   updateProfile,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
+import handshake from "../../utils/handshake.js"
 import validateEmail from '../../utils/validateEmail.js'
 
 /*
@@ -29,34 +30,36 @@ const RegisterModal = () => {
     const password = document.getElementById('registerPassword').value
     const passwordConfirm = document.getElementById('registerPasswordConfirm').value
 
-    if (!fullName || !email || !password) {
-      document.getElementById('registerErrorMessage').innerHTML = "you forgot to enter your name/email/password"
-      document.getElementById('registerErrorAlert').classList.remove('hidden')
-      return
-    }
+    handshake(() => {
+      if (!fullName || !email || !password) {
+        document.getElementById('registerErrorMessage').innerHTML = "you forgot to enter your name/email/password"
+        document.getElementById('registerErrorAlert').classList.remove('hidden')
+        return
+      }
 
-    if (!validateEmail(email)) {
-      document.getElementById('registerErrorMessage').innerHTML = "invalid email"
-      document.getElementById('registerErrorAlert').classList.remove('hidden')
-      return
-    }
+      if (!validateEmail(email)) {
+        document.getElementById('registerErrorMessage').innerHTML = "invalid email"
+        document.getElementById('registerErrorAlert').classList.remove('hidden')
+        return
+      }
 
-    if (password === passwordConfirm) {
-      document.getElementById('registerErrorMessage').innerHTML = "you confirmed your password incorrectly"
-      document.getElementById('registerErrorAlert').classList.remove('hidden')
-      return
-    }
+      if (password === passwordConfirm) {
+        document.getElementById('registerErrorMessage').innerHTML = "you confirmed your password incorrectly"
+        document.getElementById('registerErrorAlert').classList.remove('hidden')
+        return
+      }
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user
-        updateProfile(user, {
-          displayName: fullName,
-          photoURL: `https://eu.ui-avatars.com/api/?background=random&name=${fullName.split(' ').join('+')}`
-        }).then(() => {
-          window.rerender()
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          const user = userCredential.user
+          updateProfile(user, {
+            displayName: fullName,
+            photoURL: `https://eu.ui-avatars.com/api/?background=random&name=${fullName.split(' ').join('+')}`
+          }).then(() => {
+            window.rerender()
+          })
         })
-      })
+    })
   }
 
   return `

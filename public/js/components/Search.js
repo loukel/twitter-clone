@@ -1,19 +1,15 @@
+import handshake from "../utils/handshake.js"
+
 const Search = () => {
   window.searchUser = () => {
     const e = self.event
     e.preventDefault()
     const userQuery = document.getElementById('userSearchInput').value
     if (userQuery) {
-      fetch('/')
-        .then(() => {
-          window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?search=${userQuery}`))
-          window.rerender()
-        })
-        .catch(error => {
-          console.error(error)
-          console.error('Server has disconnected!')
-          alert('server has disconnected')
-        })
+      handshake(() => {
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?search=${userQuery}`))
+        window.rerender()
+      })
     }
   }
 

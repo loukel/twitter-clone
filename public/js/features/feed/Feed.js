@@ -7,6 +7,7 @@ import {
 } from "../../services/postApi.js"
 import NewPost from "./NewPost.js"
 import Posts from "../../components/Posts.js"
+import handshake from "../../utils/handshake.js"
 
 const Feed = async () => {
   let posts = await getPosts()
@@ -18,21 +19,23 @@ const Feed = async () => {
   const parameters = new URLSearchParams(window.location.search)
 
   // When the user scrolls to the bottom of the feed more posts load
-  window.onscroll = async () => {
+  window.onscroll = () => {
     if (parameters.get('userId') === null && !window.lastPage && !window.loadingPosts && window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      window.loadingPosts = true
-      const postsEl = document.getElementById('posts')
-      postsEl.innerHTML += `<div class='flex justify-center' id='loadingPosts'>Loading more posts...</div>`
-      const morePosts = await getPosts(window.page + 1)
-      const loadingPostsEl = document.getElementById('loadingPosts')
-      postsEl.removeChild(loadingPostsEl)
-      postsEl.innerHTML += Posts(morePosts)
+      handshake(async () => {
+        window.loadingPosts = true
+        const postsEl = document.getElementById('posts')
+        postsEl.innerHTML += `<div class='flex justify-center' id='loadingPosts'>Loading more posts...</div>`
+        const morePosts = await getPosts(window.page + 1)
+        const loadingPostsEl = document.getElementById('loadingPosts')
+        postsEl.removeChild(loadingPostsEl)
+        postsEl.innerHTML += Posts(morePosts)
 
-      window.page += 1
-      window.loadingPosts = false
-      if (morePosts.length < 10) {
-        window.lastPage = true
-      }
+        window.page += 1
+        window.loadingPosts = false
+        if (morePosts.length < 10) {
+          window.lastPage = true
+        }
+      })
     }
   }
 

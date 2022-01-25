@@ -5,8 +5,13 @@ from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 
 const getPosts = async (page) => {
   const posts = await fetch(`/api/posts?page=${page || 1}`, {
-    method: 'GET',
-  }).then(res => res.json())
+      method: 'GET',
+    })
+    .then(res => res.json())
+    .catch(error => {
+      console.log(error)
+      return []
+    })
 
   return posts
 }
@@ -25,7 +30,10 @@ const createPost = async (body) => {
       body: JSON.stringify(body),
     })
     .then(res => res.json())
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      return []
+    })
 
   return post
 }
@@ -35,7 +43,7 @@ const getPost = async (id) => {
     .then(res => res.json())
     .catch(error => {
       console.error(error)
-      return false
+      return {}
     })
 
   return post

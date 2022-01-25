@@ -15,6 +15,7 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
 import Search from "./components/Search.js"
+import handshake from "./utils/handshake.js"
 
 const parameters = new URLSearchParams(window.location.search)
 const postId = parameters.get('postId')
@@ -25,65 +26,63 @@ const main = () => {
   window.goToUser = id => {
     self.event.stopPropagation()
     if (userId != id) {
-      fetch('/')
-        .then(() => {
-          window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?userId=${id}`))
-          window.rerender()
-        })
-        .catch(error => {
-          console.error(error)
-          console.error('Server has disconnected!')
-          alert('Server has disconnected!')
-        })
+      handshake(() => {
+        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?userId=${id}`))
+        window.rerender()
+      })
     }
   }
 
   window.likePost = postId => {
     const e = self.event
     e.stopPropagation()
-    createLike({
-        postId,
-      })
-      .then(like => {
-        // Update like button on post to display that it has been liked
-        const likeButtonEl = document.getElementById(`likeBtn-${postId}`)
-        likeButtonEl.innerHTML = 'liked'
-        likeButtonEl.classList.remove('font-semibold')
-        likeButtonEl.classList.add('font-bold')
-        likeButtonEl.classList.add('bg-blue-700')
-        likeButtonEl.classList.add('text-white')
-        likeButtonEl.setAttribute('onclick', `removeLike('${like.id}')`)
+    handshake(() => {
+      createLike({
+          postId,
+        })
+        .then(like => {
+          // Update like button on post to display that it has been liked
+          const likeButtonEl = document.getElementById(`likeBtn-${postId}`)
+          likeButtonEl.innerHTML = 'liked'
+          likeButtonEl.classList.remove('font-semibold')
+          likeButtonEl.classList.add('font-bold')
+          likeButtonEl.classList.add('bg-blue-700')
+          likeButtonEl.classList.add('text-white')
+          likeButtonEl.setAttribute('onclick', `removeLike('${like.id}')`)
 
-        // Increment like counter on post element
-        const likeCounterEl = document.getElementById(`likeCounter-${postId}`)
-        let count = Number(likeCounterEl.dataset.count)
-        count += 1
-        likeCounterEl.dataset.count = count
-        likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
-      })
+          // Increment like counter on post element
+          const likeCounterEl = document.getElementById(`likeCounter-${postId}`)
+          let count = Number(likeCounterEl.dataset.count)
+          count += 1
+          likeCounterEl.dataset.count = count
+          likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
+        })
+    })
   }
 
   window.removeLike = (likeId) => {
     const e = self.event
     e.stopPropagation()
-    destroyLike(likeId)
-      .then(like => {
-        // Update like button on post to display that it has been liked
-        const likeButtonEl = document.getElementById(`likeBtn-${like.postId}`)
-        likeButtonEl.innerHTML = 'like'
-        likeButtonEl.classList.add('font-semibold')
-        likeButtonEl.classList.remove('font-bold')
-        likeButtonEl.classList.remove('bg-blue-700')
-        likeButtonEl.classList.remove('text-white')
-        likeButtonEl.setAttribute('onclick', `likePost('${like.postId}')`)
+    handshake(() => {
+      destroyLike(likeId)
+        .then(like => {
+          // Update like button on post to display that it has been liked
+          const likeButtonEl = document.getElementById(`likeBtn-${like.postId}`)
+          likeButtonEl.innerHTML = 'like'
+          likeButtonEl.classList.add('font-semibold')
+          likeButtonEl.classList.remove('font-bold')
+          likeButtonEl.classList.remove('bg-blue-700')
+          likeButtonEl.classList.remove('text-white')
+          likeButtonEl.setAttribute('onclick', `likePost('${like.postId}')`)
 
-        // Increment like counter on post element
-        const likeCounterEl = document.getElementById(`likeCounter-${like.postId}`)
-        let count = Number(likeCounterEl.dataset.count)
-        count -= 1
-        likeCounterEl.dataset.count = count
-        likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
-      })
+          // Increment like counter on post element
+          const likeCounterEl = document.getElementById(`likeCounter-${like.postId}`)
+          let count = Number(likeCounterEl.dataset.count)
+          count -= 1
+          likeCounterEl.dataset.count = count
+          likeCounterEl.innerText = `${count} like${count !== 1 ? 's' : ''}`
+        })
+    })
   }
 
   // Modifed from codegrepper post created by https://www.codegrepper.com/profile/mitchell-yuen (js add params to url)
@@ -93,29 +92,17 @@ const main = () => {
     if (postId && postId == id) {
       return
     }
-    fetch('/')
-      .then(() => {
-        window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?postId=${id}`))
-        window.rerender()
-      })
-      .catch(error => {
-        console.error(error)
-        console.error('Server has disconnected!')
-        alert('Server has disconnected!')
-      })
+    handshake(() => {
+      window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?postId=${id}`))
+      window.rerender()
+    })
   }
 
   window.goHome = () => {
-    fetch('/')
-      .then(() => {
-        window.history.pushState({}, document.title, window.location.pathname)
-        window.rerender()
-      })
-      .catch(error => {
-        console.error(error)
-        console.error('Server has disconnected!')
-        alert('Server has disconnected!')
-      })
+    handshake(() => {
+      window.history.pushState({}, document.title, window.location.pathname)
+      window.rerender()
+    })
   }
 
   const rootEl = document.getElementById('root')

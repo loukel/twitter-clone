@@ -5,6 +5,7 @@ import {
   browserLocalPersistence,
 }
 from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js"
+import handshake from "../../utils/handshake.js"
 import validateEmail from '../../utils/validateEmail.js'
 
 /*
@@ -28,30 +29,31 @@ const LoginModal = () => {
     self.event.preventDefault()
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
+    handshake(() => {
+      if (!email || !password) {
+        document.getElementById('loginErrorMessage').innerHTML = "you forgot to enter your email/password"
+        document.getElementById('loginErrorAlert').classList.remove('hidden')
+        return
+      }
 
-    if (!email || !password) {
-      document.getElementById('loginErrorMessage').innerHTML = "you forgot to enter your email/password"
-      document.getElementById('loginErrorAlert').classList.remove('hidden')
-      return
-    }
+      if (!validateEmail(email)) {
+        document.getElementById('loginErrorMessage').innerHTML = "invalid email"
+        document.getElementById('loginErrorAlert').classList.remove('hidden')
+        return
+      }
 
-    if (!validateEmail(email)) {
-      document.getElementById('loginErrorMessage').innerHTML = "invalid email"
-      document.getElementById('loginErrorAlert').classList.remove('hidden')
-      return
-    }
-
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        signInWithEmailAndPassword(auth, email, password)
-          .then(() => {
-            window.rerender()
-          })
-          .catch(() => {
-            document.getElementById('loginErrorMessage').innerHTML = "incorrect email/password combination entered or account doesn't exist"
-            document.getElementById('loginErrorAlert').classList.remove('hidden')
-          })
-      })
+      setPersistence(auth, browserLocalPersistence)
+        .then(() => {
+          signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+              window.rerender()
+            })
+            .catch(() => {
+              document.getElementById('loginErrorMessage').innerHTML = "Incorrect email/password combination entered or account doesn't exist"
+              document.getElementById('loginErrorAlert').classList.remove('hidden')
+            })
+        })
+    })
   }
 
   return `
