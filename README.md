@@ -1,4 +1,4 @@
-# assignment-1
+# Social Media
 
 ## Introduction
 
@@ -33,6 +33,20 @@ Example (Recommended)<br>
 Email: `1@test.com`<br>
 Password: `password`
 
+### How to explore the project
+
+There are 4 pages to the site, feed (home), profile, user list (by searching user, I recommend searching 'com' which displays all users then maybe search using a number), post view (when you click on a post).
+<br><br>
+You can like and unlike posts.<br>
+Create new posts on the feed and reply to posts on the post view. <br>
+You can load more posts on the feed by scrolling to the bottom.<br>
+You can login, register and sign out by clicking them on nav bar.<br>
+If you want to get back to the feed click the social media header. <br>
+
+## Loading
+
+The API can be very slow due to the way data is stored - in JSON files.
+
 ## Design Inspirations
 
 - Front-end renderer inspired by [React](https://reactjs.org/).
@@ -57,7 +71,7 @@ Password: `password`
 
 - Through out the whole project, camel case is used for naming conventions. However, within controllers snake case is used for function names to identify that they are endpoint functions rather than normal functions. Following https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
 
-## Bug
+## Bugs
 
 There's one bug that occurs relating to the rerenderer, when a user signs in or out the pages on the front-end may mess up.
 
