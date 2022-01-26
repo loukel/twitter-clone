@@ -18,6 +18,8 @@ This web app is a social media inspired by Twitter, posts are not allowed to inc
 
 -`npm run build:css`
 -`npm run seed`
+-`npm run pretest`
+-`npm run test` - note my tests may take a while to run (they take over 30 seconds for me)
 
 ## Firebase
 
@@ -54,3 +56,9 @@ Password: `password`
 ## Back-end functionality explaination & notes
 
 - Through out the whole project, camel case is used for naming conventions. However, within controllers snake case is used for function names to identify that they are endpoint functions rather than normal functions. Following https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
+
+## Bug
+
+There's one bug that occurs relating to the rerenderer, when a user signs in or out the pages on the front-end may mess up.
+
+🐐

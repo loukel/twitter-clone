@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "seed": "node seed.js",
+    "pretest": "eslint .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "npm run test --watch",
     "build:css": "postcss public/styles/tailwind.css -o public/styles/index.css",
